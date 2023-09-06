@@ -1,5 +1,6 @@
 'use strict';
 
+console.log(localStorage);
 // Expand header animation
 
 let expandButton = document.getElementById("expandButton");
@@ -23,7 +24,6 @@ let yField = document.getElementById("yField");
 let rButtons = document.getElementsByName("rChoosing");
 
 function checkX(){
-    let f = false;
     for (let btn of xButtons) {
         if (btn.checked === true)
             return true;
@@ -34,14 +34,16 @@ function checkX(){
 }
 
 function checkY(){
-    let val = +(yField.value.replace(',', '.'));
 
     if (yField.value == null || yField.value === "") {
         wrongInpMsg.textContent = "You should enter Y value";
         wrongInpMsg.style.visibility = "visible";
         return false;
     }
-    else if (isNaN(val)) {
+
+    let val = +(yField.value.replaceAll(',', '.'));
+
+    if (isNaN(val)) {
         wrongInpMsg.textContent = "You may input only numbers in Y field";
         wrongInpMsg.style.visibility = "visible";
         return false;
@@ -82,35 +84,6 @@ function checkR(){
 
 let checkBtn = document.getElementById("checkRequestButton");
 let wrongInpMsg = document.getElementById("incorrectInputText");
-
-checkBtn.addEventListener("click", () => {
-    if (!checkX() || !checkY() || !checkR()) return;
-    checkValues();
-});
-
-let tableBody = document.getElementById("mainTableBody");
-
-async function checkValues(){
-    let form = document.getElementById("mainForm");
-    let data = new FormData(form);
-
-    let requestTime = new Date().toLocaleString();
-    let response = await fetch("checker.php", {
-        method: 'POST',
-        body: data
-    });
-    let res = await response.json();
-    resetBtn.click();
-    tableBody.insertAdjacentHTML("afterbegin",
-        "<tr>" +
-        "<td>" + res.x + "</td>" +
-        "<td>" + res.y + "</td>" +
-        "<td>" + res.r + "</td>" +
-        "<td>" + res.result + "</td>" +
-        "<td>" + requestTime + "</td>" +
-        "<td>" + res.executing + " ms</td>" +
-        "</tr>");
-}
 
 let resetBtn = document.getElementById("resetRequestButton");
 
@@ -153,12 +126,12 @@ function setRValues() {
 
     mR[0].textContent = -rVal;
     mR[1].textContent = -rVal;
-    mR2[0].textContent = (-rVal/2).toFixed(1);
-    mR2[1].textContent = (-rVal/2).toFixed(1);
+    mR2[0].textContent = (-rVal/2).toFixed(2);
+    mR2[1].textContent = (-rVal/2).toFixed(2);
     R[0].textContent = rVal;
     R[1].textContent = rVal;
-    R2[0].textContent = (rVal/2).toFixed(1);
-    R2[1].textContent = (rVal/2).toFixed(1);
+    R2[0].textContent = (rVal/2).toFixed(2);
+    R2[1].textContent = (rVal/2).toFixed(2);
 }
 
 function resetRValues() {
@@ -174,4 +147,76 @@ function resetRValues() {
 
 for (let i = 0; i < rButtons.length; i++) {
     rButtons[i].addEventListener("change", setRValues);
+}
+
+checkBtn.addEventListener("click", () => {
+    if (!checkX() || !checkY() || !checkR()) return;
+    checkValues();
+});
+
+let tableBody = document.getElementById("mainTableBody");
+let tableContent = [];
+
+function insertInTable(json) {
+    tableBody.insertAdjacentHTML("afterbegin",
+        "<tr>" +
+        "<td>" + json.x + "</td>" +
+        "<td>" + json.y + "</td>" +
+        "<td>" + json.r + "</td>" +
+        "<td>" + json.result + "</td>" +
+        "<td>" + json.requestTime + "</td>" +
+        "<td>" + json.executing + " ms</td>" +
+        "</tr>");
+}
+
+async function checkValues(){
+    let form = document.getElementById("mainForm");
+    let data = new FormData(form);
+
+    let requestTime = new Date().toLocaleString();
+    let response = await fetch("checker.php", {
+        method: 'POST',
+        body: data
+    });
+    let res = await response.json();
+    res["requestTime"] = requestTime;
+
+    // Clearing input fields
+    resetBtn.click();
+
+    // Saving last requests in array for caching for 15 min
+    res["expiry"] = new Date().getTime() + 900000;
+    tableContent.push(res);
+
+    if (res.result === "YES") {
+        alert("Point in area!");
+    }
+    else {
+        alert("Point out of area");
+    }
+
+    insertInTable(res);
+}
+
+function loadTableCache() {
+    let cache = JSON.parse(localStorage.getItem("requests"));
+    if (cache == null || cache.length === 0) return;
+    let now = new Date().getTime();
+
+    for (let elem of cache) {
+        if (now < elem["expiry"]) {
+            insertInTable(elem);
+            tableContent.push(elem);
+        }
+    }
+}
+
+loadTableCache();
+
+function cacheTable(){
+    localStorage.setItem("requests", JSON.stringify(tableContent));
+}
+
+window.onbeforeunload = function () {
+    cacheTable();
 }
