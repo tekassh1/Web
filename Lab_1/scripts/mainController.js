@@ -18,63 +18,109 @@ expandButton.addEventListener("click", function () {
     }
 );
 
-let xField = document.getElementById("xSelect");
+let xButtons = document.getElementsByName("xChoosing");
 let yField = document.getElementById("yField");
-// let rBox = document.getElementById("rSelect");
+let rButtons = document.getElementsByName("rChoosing");
 
-let checkBtn = document.getElementById("checkRequest");
-let wrongInpMsg = document.getElementById("incorrectInputText");
-checkBtn.addEventListener("click", function () {
-    wrongInpMsg.style.visibility = "hidden";
-
-    if (xField.value === "0") {
-        wrongInpMsg.textContent = "You should select X value";
-        wrongInpMsg.style.visibility = "visible";
-        return;
+function checkX(){
+    let f = false;
+    for (let btn of xButtons) {
+        if (btn.checked === true)
+            return true;
     }
+    wrongInpMsg.textContent = "You should select X value";
+    wrongInpMsg.style.visibility = "visible";
+    return false;
+}
 
-    let val = +yField.value;
+function checkY(){
+    let val = +(yField.value.replace(',', '.'));
 
     if (yField.value == null || yField.value === "") {
         wrongInpMsg.textContent = "You should enter Y value";
         wrongInpMsg.style.visibility = "visible";
-        return;
+        return false;
     }
     else if (isNaN(val)) {
         wrongInpMsg.textContent = "You may input only numbers in Y field";
         wrongInpMsg.style.visibility = "visible";
-        return;
+        return false;
     }
     else if (val < -5 || val > 3) {
         wrongInpMsg.textContent = "Available range for Y field is {-5; 3}";
         wrongInpMsg.style.visibility = "visible";
-        return;
+        return false;
     }
+    return true;
+}
 
-    let rButtons = document.getElementsByName("rChoosing");
-    let f = false;
+function checkRAmount(){
+    let c = 0;
     for (let i = 0; i < rButtons.length; i++) {
-        if (rButtons[i].checked === true) {
-            f = true;
-            break;
-        }
+        if (rButtons[i].checked === true)
+            c++;
     }
-    if (f === false) {
+    return c;
+}
+
+function checkR(){
+    let amount = checkRAmount();
+
+    if (amount === 0) {
         wrongInpMsg.textContent = "You should select R value";
         wrongInpMsg.style.visibility = "visible";
-        return;
+        return false;
+    }
+    else if (amount > 1) {
+        wrongInpMsg.textContent = "You should select only one R value";
+        wrongInpMsg.style.visibility = "visible";
+        return false;
     }
 
-    alert("Request to server...");
+    return true;
+}
+
+let checkBtn = document.getElementById("checkRequestButton");
+let wrongInpMsg = document.getElementById("incorrectInputText");
+
+checkBtn.addEventListener("click", () => {
+    if (!checkX() || !checkY() || !checkR()) return;
+    checkValues();
 });
 
-let rButtons = document.getElementsByName("rChoosing");
-let resetBtn = document.getElementById("resetRequest");
+let tableBody = document.getElementById("mainTableBody");
+
+async function checkValues(){
+    let form = document.getElementById("mainForm");
+    let data = new FormData(form);
+
+    let requestTime = new Date().toLocaleString();
+    let response = await fetch("checker.php", {
+        method: 'POST',
+        body: data
+    });
+    let res = await response.json();
+    resetBtn.click();
+    tableBody.insertAdjacentHTML("afterbegin",
+        "<tr>" +
+        "<td>" + res.x + "</td>" +
+        "<td>" + res.y + "</td>" +
+        "<td>" + res.r + "</td>" +
+        "<td>" + res.result + "</td>" +
+        "<td>" + requestTime + "</td>" +
+        "<td>" + res.executing + " ms</td>" +
+        "</tr>");
+}
+
+let resetBtn = document.getElementById("resetRequestButton");
 
 resetBtn.addEventListener("click", function () {
     wrongInpMsg.style.visibility = "hidden";
-    xField.value = "0";
     yField.value = null;
+
+    for (let i = 0; i < xButtons.length; i++) {
+        xButtons[i].checked = false;
+    }
 
     for (let i= 0; i < rButtons.length; i++){
         rButtons[i].checked = false;
@@ -97,6 +143,12 @@ function getChecked() {
 }
 
 function setRValues() {
+
+    if (checkRAmount() === 0) {
+        resetRValues();
+        return;
+    }
+
     let rVal = getChecked();
 
     mR[0].textContent = -rVal;
@@ -121,5 +173,5 @@ function resetRValues() {
 }
 
 for (let i = 0; i < rButtons.length; i++) {
-    rButtons[i].addEventListener("click", setRValues);
+    rButtons[i].addEventListener("change", setRValues);
 }
