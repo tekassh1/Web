@@ -11,6 +11,7 @@ body {
 }
 
 header {
+    font-family: monospace, monospace; /*remove*/
     grid-area: header;
     z-index: 1;
     border-bottom: 1px solid #dadce0;
@@ -147,7 +148,7 @@ header .expandAuthor .img {
 
 .xButtons {
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 1.5%;
 }
 
 .xLabels {
@@ -197,14 +198,14 @@ select:focus {
 }
 
 .ySelectionPanel input {
-    padding-left: 10px;
+    padding-left: 1%;
     background-color: #f3f3f3;
     border-style: none;
     cursor: text;
-    margin-top: 15px;
+    margin-top: 1.5%;
     width: 30%;
     height: 15%;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 .ySelectionPanel input:focus {

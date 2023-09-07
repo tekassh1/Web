@@ -5,6 +5,10 @@ $xValue = $_POST["xChoosing"];
 $yValue = $_POST["yChoosing"];
 $rValue = $_POST["rChoosing"];
 
+if (!is_numeric($xValue) || !is_numeric($yValue) || !is_numeric($rValue)) {
+    echo "Wrong data!";
+}
+
 function checkRectangle($x, $y, $r): bool
 {
     return ($x <= 0 && $y <= 0 && $x >= -$r && $y >= -($r/2));

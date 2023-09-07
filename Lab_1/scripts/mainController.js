@@ -40,8 +40,8 @@ function checkY(){
         wrongInpMsg.style.visibility = "visible";
         return false;
     }
-
-    let val = +(yField.value.replaceAll(',', '.'));
+    yField.value = yField.value.replaceAll(',', '.');
+    let val = +(yField.value);
 
     if (isNaN(val)) {
         wrongInpMsg.textContent = "You may input only numbers in Y field";
