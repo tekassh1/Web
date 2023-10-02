@@ -3,6 +3,7 @@
     padding: 0;
 }
 
+/*Inheritance*/
 body {
     font-family: 'Montserrat', sans-serif;
     width: 100%;
@@ -10,8 +11,9 @@ body {
     background-color: #e3e3e3
 }
 
+/*Cascading*/
 header {
-    font-family: monospace, monospace; /*remove*/
+    font-family: 'Montserrat', sans-serif;
     grid-area: header;
     z-index: 1;
     border-bottom: 1px solid #dadce0;
@@ -23,6 +25,7 @@ header {
 }
 
 header .logo {
+    font-family: 'Montserrat', sans-serif;
     background-color: white;
     z-index: 1;
     float: left;
@@ -43,6 +46,7 @@ header .logo:hover {
 }
 
 header .label {
+    font-family: 'Montserrat', sans-serif;
     z-index: 0;
     width: 100%;
     position: absolute;
@@ -52,6 +56,7 @@ header .label {
 }
 
 header .expandAuthor {
+    font-family: 'Montserrat', sans-serif;
     z-index: 1;
     float: right;
     margin-right: 13px;
@@ -77,6 +82,7 @@ header .expandAuthor .img {
 }
 
 .infoText {
+    font-family: 'Montserrat', sans-serif;
     width: 100%;
     text-align: center;
     background-color: white;
@@ -230,7 +236,8 @@ select:focus {
     cursor: pointer;
 }
 
-.requestButtonsBlock {
+/*Attribute selector*/
+div[name="requestButtonsBlock"] {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -239,6 +246,7 @@ select:focus {
     float: left;
 }
 
+/*Id selector*/
 #incorrectInputText {
     visibility: hidden;
     margin-bottom: 15px;
@@ -256,6 +264,7 @@ select:focus {
     height: 40px;
 }
 
+/*Pseudo-class selector*/
 #checkRequestButton:hover {
     background-color: #006abe;
 }
@@ -309,7 +318,8 @@ select:focus {
     background-color: white;
 }
 
-table {
+/*Child elements selector*/
+.secondaryPanel .tableBlock > table {
     overflow-y: auto;
     overflow-x: hidden;
     text-align: center;

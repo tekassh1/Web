@@ -11,9 +11,9 @@ expandButton.addEventListener("click", function () {
 
         if (block.style.maxHeight){
             block.style.maxHeight = null;
-            arrow.src = "images/arrow-down.svg";
+            arrow.src = "resources/images/arrow-down.svg";
         } else {
-            arrow.src = "images/arrow-up.svg";
+            arrow.src = "resources/images/arrow-up.svg";
             block.style.maxHeight = block.scrollHeight + "px";
         }
     }

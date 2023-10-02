@@ -5,7 +5,16 @@ $xValue = $_POST["xChoosing"];
 $yValue = $_POST["yChoosing"];
 $rValue = $_POST["rChoosing"];
 
-if (!is_numeric($xValue) || !is_numeric($yValue) || !is_numeric($rValue)) {
+function checkValues($x, $y, $r): bool {
+    $rValues = [1, 1.5, 2, 2.5, 3];
+    if (!is_numeric($x) || !is_numeric($y) || !is_numeric($r)) return false;
+    if (is_float($x) || $x > 5 || $x < -3) return false;
+    if ($y < -5 || $y > 3) return false;
+    if (!in_array($r, $rValues)) return false;
+    return true;
+}
+
+if (!checkValues($xValue, $yValue, $rValue)) {
     echo "Wrong data!";
 }
 

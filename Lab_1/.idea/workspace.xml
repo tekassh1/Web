@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee474edf-b504-4b59-a149-f9f5d84dc81d" name="Changes" comment="All tasks including caching are done:)">
+    <list default="true" id="ee474edf-b504-4b59-a149-f9f5d84dc81d" name="Changes" comment="ITMO version (css in html file)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checker.php" beforeDir="false" afterPath="$PROJECT_DIR$/checker.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/mainController.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mainController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/mainPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/mainPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/todo.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,9 +85,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1694076999040</updated>
-      <workItem from="1694077003785" duration="872000" />
+      <workItem from="1694077003785" duration="979000" />
+      <workItem from="1694078191045" duration="129000" />
+      <workItem from="1694716378782" duration="1393000" />
+      <workItem from="1694760195425" duration="3903000" />
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ITMO version (css in html file)">
+      <option name="closed" value="true" />
+      <created>1694077921302</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694077921302</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,7 +107,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="All tasks are done (excluding caching and y validation)" />
     <MESSAGE value="All tasks including caching are done:)" />
-    <option name="LAST_COMMIT_MESSAGE" value="All tasks including caching are done:)" />
+    <MESSAGE value="ITMO version (css in html file)" />
+    <option name="LAST_COMMIT_MESSAGE" value="ITMO version (css in html file)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
