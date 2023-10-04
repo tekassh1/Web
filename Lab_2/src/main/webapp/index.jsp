@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" style="height: 100%; width: 100%">
 
 <head>
@@ -26,7 +25,7 @@
         <div id="expanded" class="infoText">
             <p>Student:<a class="colourfulText"> Kuznetsov Daniil</a></p>
             <p>Group:<a class="colourfulText"> P3234</a></p>
-            <p>Variant:<a class="colourfulText"> 1502</a></p>
+            <p>Variant:<a class="colourfulText"> 3402</a></p>
             <br>
         </div>
 
@@ -38,32 +37,32 @@
             <fieldset style="display: inline-block; padding-top: 10px;" class="xSelectionPanel">
                 Select<a class="colourfulText"> X </a>value<br>
 
-                <input class="xButtons" type="radio" value="-3" id="m3X" name="xChoosing">
-                <label class="xLabels" for="m3X">-3</label><br>
-
                 <input class="xButtons" type="radio" value="-2" id="m2X" name="xChoosing">
                 <label class="xLabels" for="m2X">-2</label><br>
+
+                <input class="xButtons" type="radio" value="-1.5" id="m15X" name="xChoosing">
+                <label class="xLabels" for="m15X">-1.5</label><br>
 
                 <input class="xButtons" type="radio" value="-1" id="m1X" name="xChoosing">
                 <label class="xLabels" for="m1X">-1</label><br>
 
-                <input class="xButtons" type="radio" value="0" id="zX" name="xChoosing">
-                <label class="xLabels" for="zX">0</label><br>
+                <input class="xButtons" type="radio" value="-0.5" id="m05X" name="xChoosing">
+                <label class="xLabels" for="m05X">-0.5</label><br>
 
-                <input class="xButtons" type="radio" value="1" id="oX" name="xChoosing">
-                <label class="xLabels" for="oX">1</label><br>
+                <input class="xButtons" type="radio" value="0" id="0X" name="xChoosing">
+                <label class="xLabels" for="0X">0</label><br>
 
-                <input class="xButtons" type="radio" value="2" id="tX" name="xChoosing">
-                <label class="xLabels" for="tX">2</label><br>
+                <input class="xButtons" type="radio" value="0.5" id="05X" name="xChoosing">
+                <label class="xLabels" for="05X">0.5</label><br>
 
-                <input class="xButtons" type="radio" value="3" id="thX" name="xChoosing">
-                <label class="xLabels" for="thX">3</label><br>
+                <input class="xButtons" type="radio" value="1" id="1X" name="xChoosing">
+                <label class="xLabels" for="1X">1</label><br>
 
-                <input class="xButtons" type="radio" value="4" id="foX" name="xChoosing">
-                <label class="xLabels" for="foX">4</label><br>
+                <input class="xButtons" type="radio" value="1.5" id="15X" name="xChoosing">
+                <label class="xLabels" for="15X">1.5</label><br>
 
-                <input class="xButtons" type="radio" value="5" id="fiX" name="xChoosing">
-                <label class="xLabels" for="fiX">5</label><br>
+                <input class="xButtons" type="radio" value="2" id="2X" name="xChoosing">
+                <label class="xLabels" for="2X">2</label><br>
             </fieldset>
 
             <div class="ySelectionPanel">

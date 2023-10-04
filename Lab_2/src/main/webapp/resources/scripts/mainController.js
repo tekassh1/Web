@@ -46,7 +46,7 @@ function checkY(){
         wrongInpMsg.style.visibility = "visible";
         return false;
     }
-    else if (val < -5 || val > 3) {
+    else if (val < -3 || val > 3) {
         wrongInpMsg.textContent = "Available range for Y field is {-5; 3}";
         wrongInpMsg.style.visibility = "visible";
         return false;
@@ -205,7 +205,7 @@ async function checkValues(){
     let data = new FormData(form);
 
     let requestTime = new Date().toLocaleString();
-    let response = await fetch("checker.php", {
+    let response = await fetch("http://localhost:8080/Lab_2-1.0-SNAPSHOT/", {
         method: 'POST',
         body: data
     });
