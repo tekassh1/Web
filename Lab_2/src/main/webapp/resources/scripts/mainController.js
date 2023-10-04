@@ -1,8 +1,6 @@
 'use strict';
 
-console.log(localStorage);
 // Expand header animation
-
 let expandButton = document.getElementById("expandButton");
 expandButton.addEventListener("click", function () {
 
@@ -107,7 +105,7 @@ let mR2 = document.getElementsByClassName("mR2");
 let R2 = document.getElementsByClassName("R2");
 let R = document.getElementsByClassName("R");
 
-function getChecked() {
+function getRChecked() {
     for (let i= 0; i < rButtons.length; i++){
         if (rButtons[i].checked === true) {
             return rButtons[i].value;
@@ -122,7 +120,7 @@ function setRValues() {
         return;
     }
 
-    let rVal = getChecked();
+    let rVal = getRChecked();
 
     mR[0].textContent = -rVal;
     mR[1].textContent = -rVal;
@@ -147,6 +145,39 @@ function resetRValues() {
 
 for (let i = 0; i < rButtons.length; i++) {
     rButtons[i].addEventListener("change", setRValues);
+}
+
+let coordinatePlane = document.getElementById("coordinatePlane");
+let clickArea = document.getElementById("clickArea");
+
+clickArea.onclick = function (e) {
+    let domPoint = new DOMPoint(e.clientX, e.clientY);
+
+    // Coordinates translation for ViewBox sizing support
+    let cursorPoint = domPoint.matrixTransform(coordinatePlane.getScreenCTM().inverse());
+
+    let rSelectionRes = checkRAmount();
+    if (rSelectionRes > 1) {
+        alert("You should select only one R value!");
+        return;
+    }
+    else if (rSelectionRes !== 1){
+        alert("You should select R value!");
+        return;
+    }
+
+    let rVal = + getRChecked();
+    let scaleCoefficient = 220 / rVal;  // 220 because of 30px padding from the frame
+
+    let areaClickedX = cursorPoint.x;  // Coords in svg area
+    let areaClickedY = cursorPoint.y;
+
+    let xCoord = ((areaClickedX - 250)/scaleCoefficient).toFixed(2);   // Coords in coordinate system
+    let yCoord = ((250 - areaClickedY)/scaleCoefficient).toFixed(2);
+
+    alert(`Xcoord: ${xCoord}, Ycoord: ${yCoord}`);
+    let insertDot = `<circle cx=\"${cursorPoint.x}\" cy=\"${cursorPoint.y}\" r=\"5\" fill=\"red\" />`
+    coordinatePlane.insertAdjacentHTML("afterbegin", insertDot);
 }
 
 checkBtn.addEventListener("click", () => {

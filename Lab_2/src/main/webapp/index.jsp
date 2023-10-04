@@ -17,7 +17,7 @@
 <body>
 <div class="wrapper">
     <header class="header">
-        <h2 class="label">LAB 1</h2>
+        <h2 class="label">LAB 2</h2>
         <img src="resources/images/main.svg" id="logo" class="logo" alt="userIcon">
         <button id="expandButton" class="expandAuthor">
             <img src="resources/images/arrow-down.svg" id="arrow" class="img" alt="expandAuthorIcon">
@@ -79,17 +79,17 @@
                 <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="1" id="r1">
                 <label style="padding-right: 1.5%;" for="r1">1</label>
 
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="1.5" id="r15">
-                <label style="padding-right: 1.5%;" for="r15">1.5</label>
-
                 <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="2" id="r2">
                 <label style="padding-right: 1.5%;" for="r2">2</label>
 
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="2.5" id="r25">
-                <label style="padding-right: 1.5%;" for="r25">2.5</label>
+                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="3" id="r3">
+                <label style="padding-right: 1.5%;" for="r3">3</label>
 
-                <input class="rButtons" type="checkbox" name="rChoosing" value="3" id="r3">
-                <label for="r3">3</label>
+                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="4" id="r4">
+                <label style="padding-right: 1.5%;" for="r4">4</label>
+
+                <input class="rButtons" type="checkbox" name="rChoosing" value="5" id="r5">
+                <label for="r5">5</label>
             </fieldset>
 
         </form>
@@ -105,7 +105,8 @@
 
     <div class="secondaryPanel">
 
-        <svg class="coordinatePlane" viewBox="0 0 500 500">
+        <svg id="coordinatePlane" viewBox="0 0 500 500">
+
             <!-- x axis -->
             <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"></line>
             <!-- y axis -->
@@ -148,6 +149,9 @@
                A 110 110 0 0 0 250 140
                L 250 250"
                   fill="blue" opacity="0.2"></path>
+
+            <rect id="clickArea" width="100%" height="100%">
+            </rect>
         </svg>
 
         <div class="tableBlock">

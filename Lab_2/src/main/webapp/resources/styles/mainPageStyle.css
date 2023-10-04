@@ -295,7 +295,7 @@ div[name="requestButtonsBlock"] {
     margin: 20px;
 }
 
-.coordinatePlane {
+#coordinatePlane {
     float: left;
     display: block;
     box-sizing: border-box;
@@ -303,6 +303,11 @@ div[name="requestButtonsBlock"] {
     box-shadow: 0 0 15px 0 #e3e3e3;
     border-radius: 15px;
     background-color: white;
+}
+
+#clickArea {
+    cursor: pointer;
+    opacity: 0;
 }
 
 .tableBlock {
