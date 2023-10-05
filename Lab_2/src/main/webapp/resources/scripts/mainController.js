@@ -47,7 +47,7 @@ function checkY(){
         return false;
     }
     else if (val < -3 || val > 3) {
-        wrongInpMsg.textContent = "Available range for Y field is {-5; 3}";
+        wrongInpMsg.textContent = "Available range for Y field is {-3; 3}";
         wrongInpMsg.style.visibility = "visible";
         return false;
     }

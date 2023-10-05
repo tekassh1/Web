@@ -19,13 +19,10 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("xChoosing"));
-        System.out.println(req.getParameter("yChoosing"));
-        System.out.println(req.getParameter("rChoosing"));
-
-//        if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null)
-//            req.getServletContext().getNamedDispatcher("controllerServlet").forward(req, resp);
-//        else
-//            req.getServletContext().getNamedDispatcher("areaCheckServlet").forward(req, resp);
+        System.out.println(ControllerServlet.class.getName());
+        if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null)
+            req.getServletContext().getRequestDispatcher("/WEB-INF/checker").forward(req, resp);
+        else
+            req.getServletContext().getRequestDispatcher("").forward(req, resp);
     }
 }

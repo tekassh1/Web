@@ -141,11 +141,11 @@
             <text class="R" x="260" y="35">R</text>
 
             <!-- Figures -->
-            <polygon points="250 470, 250 250, 470 250" fill="blue" opacity="0.2"></polygon>
-            <rect x="30" y="250" width="220" height="110" fill="blue" opacity="0.2"></rect>
+            <polygon points="250 250, 250 140, 30 250" fill="blue" opacity="0.2"></polygon>
+            <rect x="250" y="140" width="220" height="110" fill="blue" opacity="0.2"></rect>
             <path d="M 250 250
-               L 360 250
-               A 110 110 0 0 0 250 140
+               L 30 250
+               A 220 220 0 0 0 250 470
                L 250 250"
                   fill="blue" opacity="0.2"></path>
 
