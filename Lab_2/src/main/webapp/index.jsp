@@ -5,7 +5,7 @@
 <head>
     <title>Web First</title>
     <link rel="icon" type="image/x-icon" href="resources/images/favicon.svg">
-    <link rel="stylesheet" type="text/css" href="resources/styles/mainPageStyle.css">
+    <link rel="stylesheet" type="text/css" href="styles/mainPageStyle.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,7 +181,8 @@
     </footer>
 
 </div>
-<script src="resources/scripts/mainController.js"></script>
+<script src="scripts/headerController.js"></script>
+<script src="scripts/mainPageController.js"></script>
 
 </body>
 

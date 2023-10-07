@@ -1,4 +1,4 @@
-package Servlets;
+package servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -8,21 +8,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-@WebServlet(name = "controllerServlet", urlPatterns = "")
+@WebServlet(name = "controllerServlet", urlPatterns = "/controller")
 @MultipartConfig
 public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-    }
+        if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null) {
+            req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+        else {
+            String reqTime = new SimpleDateFormat("yyyyMMdd_HHmmss")
+                    .format(Calendar.getInstance().getTime());
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(ControllerServlet.class.getName());
-        if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null)
+            req.setAttribute("reqTime", reqTime);
             req.getServletContext().getRequestDispatcher("/WEB-INF/checker").forward(req, resp);
-        else
-            req.getServletContext().getRequestDispatcher("").forward(req, resp);
+        }
     }
 }
