@@ -1,4 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%--Disable caching for keeping JSP updated --%>
+<%
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setDateHeader("Expires", -1);
+%>
+
 <!DOCTYPE html>
 <html lang="en" style="height: 100%; width: 100%">
 
@@ -164,6 +173,26 @@
                     <th style="width: 30%">Request</th>
                     <th style="width: 30%">Execution time</th>
                 </tr>
+
+                <c:forEach items="${sessionBean.recentRequests}" var="request">
+                    <tr>
+                        <td>${request.x}</td>
+                        <td>${request.y}</td>
+                        <td>${request.r}</td>
+
+                        <c:choose>
+                            <c:when test="${request.checkResult == true}">
+                                <td>YES</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>NO</td>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <td>${request.requestTime}</td>
+                        <td>${request.executionTime} ms</td>
+                    </tr>
+                </c:forEach>
 
                 <tbody id="mainTableBody">
 

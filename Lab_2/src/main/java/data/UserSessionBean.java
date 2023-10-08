@@ -17,7 +17,7 @@ public class UserSessionBean implements Serializable {
     };
 
     public void addNewResult(UserRequestData data) {
-        recentRequests.add(data);
+        recentRequests.add(0, data);
     }
 
     public List<UserRequestData> getRecentRequests() {

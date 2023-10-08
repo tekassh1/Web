@@ -7,8 +7,6 @@ public class UserRequestData implements Serializable {
     double y;
     double r;
 
-    long reqStartTime;
-
     String requestTime;
     String executionTime;
     boolean checkResult;
@@ -19,12 +17,11 @@ public class UserRequestData implements Serializable {
         this.r = r;
     }
 
-    public UserRequestData(double x, double y, double r, long reqStartTime, String requestTime,
+    public UserRequestData(double x, double y, double r, String requestTime,
                            String executionTime, boolean checkResult) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.reqStartTime = reqStartTime;
         this.requestTime = requestTime;
         this.executionTime = executionTime;
         this.checkResult = checkResult;
@@ -76,13 +73,5 @@ public class UserRequestData implements Serializable {
 
     public void setCheckResult(boolean checkResult) {
         this.checkResult = checkResult;
-    }
-
-    public long getReqStartTime() {
-        return reqStartTime;
-    }
-
-    public void setReqStartTime(long reqStartTime) {
-        this.reqStartTime = reqStartTime;
     }
 }

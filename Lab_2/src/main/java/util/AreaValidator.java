@@ -8,11 +8,11 @@ public class AreaValidator {
         double y = values.getY();
         double r = values.getR();
 
-        return checkRectangle(x, y, r) && checkSector(x, y, r) && checkTriangle(x, y, r);
+        return checkRectangle(x, y, r) || checkSector(x, y, r) || checkTriangle(x, y, r);
     }
 
     private static boolean checkRectangle(double x, double y, double r) {
-        return (x >= 0) && (x <= r) && (y <= r/2) && (y >= 0);
+        return (x >= 0) && (x <= r) && (y <= r/2.0) && (y >= 0);
     }
 
     private static boolean checkTriangle(double x, double y, double r) {
@@ -20,6 +20,6 @@ public class AreaValidator {
     }
 
     private static boolean checkSector(double x, double y, double r) {
-        return (x <= 0) && (y <= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= r);
+        return (x <= 0) && (y <= 0) && (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= r);
     }
 }

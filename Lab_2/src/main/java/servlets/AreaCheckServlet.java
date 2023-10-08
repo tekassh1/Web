@@ -19,8 +19,6 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        long reqStart = System.currentTimeMillis();
-
         double x;
         double y;
         double r;
@@ -31,7 +29,6 @@ public class AreaCheckServlet extends HttpServlet {
             r = Double.parseDouble(req.getParameter("r"));
 
             UserRequestData requestData = new UserRequestData(x, y, r);
-            requestData.setReqStartTime(reqStart);
 
             if (!InputValidator.validateValues(requestData)) throw new NumberFormatException();
 
@@ -51,7 +48,9 @@ public class AreaCheckServlet extends HttpServlet {
 
         requestData.setCheckResult(checkResult);
         requestData.setRequestTime((String) req.getAttribute("reqTime"));
-        requestData.setExecutionTime(String.valueOf(System.currentTimeMillis() - requestData.getReqStartTime()));
+        long requestStarted = (Long) req.getAttribute("reqStart");
+
+        requestData.setExecutionTime(String.valueOf(System.currentTimeMillis() - requestStarted));
 
         UserSessionBean sessionBean = (UserSessionBean) req.getSession().getAttribute("sessionBean");
         if (sessionBean == null) {
@@ -60,6 +59,6 @@ public class AreaCheckServlet extends HttpServlet {
         }
         sessionBean.addNewResult(requestData);
 
-        resp.sendRedirect(req.getContextPath() + "/resultPage.jsp");
+        resp.sendRedirect(req.getContextPath() + "/result");
     }
 }

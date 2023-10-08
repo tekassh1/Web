@@ -198,6 +198,7 @@ async function checkValues(){
         method: 'GET'
     });
 
+    location.reload();
     if (response.redirected) {
         window.location.href = response.url;
     }

@@ -32,17 +32,6 @@
     </div>
 
   </header>
-
-<%--  <c:if test="${empty sessionBean}">--%>
-<%--    Bean is empty!!!--%>
-<%--  </c:if>--%>
-
-<%--  <c:if test="${empty sessionBean.recentRequests}">--%>
-<%--    List is empty!!!--%>
-<%--  </c:if>--%>
-
-<%--  ${sessionBean} <br>--%>
-
       <c:forEach items="${sessionBean.recentRequests}" var="element">
         <c:if test="${empty element}">
             element is empty!!
@@ -52,7 +41,7 @@
         ${element.y} <br>
         ${element.r} <br>
         ${element.requestTime} <br>
-        ${element.executionTime} <br>
+        ${element.executionTime} ms <br>
         ${element.checkResult} <br>
       </c:forEach>
   </div>

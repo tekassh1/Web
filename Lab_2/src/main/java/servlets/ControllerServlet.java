@@ -16,14 +16,17 @@ import java.util.Calendar;
 public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        long reqStart = System.currentTimeMillis();
+
         if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null) {
             req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         }
         else {
-            String reqTime = new SimpleDateFormat("yyyyMMdd_HHmmss")
+            String reqTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
                     .format(Calendar.getInstance().getTime());
 
             req.setAttribute("reqTime", reqTime);
+            req.setAttribute("reqStart", reqStart);
             req.getServletContext().getRequestDispatcher("/WEB-INF/checker").forward(req, resp);
         }
     }
