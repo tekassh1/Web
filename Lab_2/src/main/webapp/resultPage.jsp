@@ -1,12 +1,5 @@
-<%@ page import="data.UserSessionBean" %>
-<%@ page import="data.UserRequestData" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-<%
-  UserSessionBean sessionBean = (UserSessionBean) session.getAttribute("sessionBean");
-  List<UserRequestData> list = sessionBean.getRecentRequests();
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en" style="height: 100%; width: 100%">
@@ -40,24 +33,28 @@
 
   </header>
 
-  <%= list.get(0).getX() %>
-  <%= list.get(0).getY() %>
-  <%= list.get(0).getR() %>
-
 <%--  <c:if test="${empty sessionBean}">--%>
-<%--    session bean is empty!!!--%>
+<%--    Bean is empty!!!--%>
 <%--  </c:if>--%>
-<%--    <c:forEach items="${list}" var="element">--%>
-<%--      <c:if test="${empty element}">--%>
-<%--          element is empty!!--%>
-<%--        </c:if>--%>
 
-<%--      ${element.y} <br>--%>
-<%--      ${element.r} <br>--%>
-<%--      ${element.requestTime} <br>--%>
-<%--      ${element.executionTime} <br>--%>
-<%--      ${element.checkResult} <br>--%>
-    </c:forEach>
+<%--  <c:if test="${empty sessionBean.recentRequests}">--%>
+<%--    List is empty!!!--%>
+<%--  </c:if>--%>
+
+<%--  ${sessionBean} <br>--%>
+
+      <c:forEach items="${sessionBean.recentRequests}" var="element">
+        <c:if test="${empty element}">
+            element is empty!!
+          </c:if>
+
+        ${element.x} <br>
+        ${element.y} <br>
+        ${element.r} <br>
+        ${element.requestTime} <br>
+        ${element.executionTime} <br>
+        ${element.checkResult} <br>
+      </c:forEach>
   </div>
 
   <footer>

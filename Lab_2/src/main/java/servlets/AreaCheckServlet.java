@@ -56,11 +56,9 @@ public class AreaCheckServlet extends HttpServlet {
         UserSessionBean sessionBean = (UserSessionBean) req.getSession().getAttribute("sessionBean");
         if (sessionBean == null) {
             sessionBean = new UserSessionBean();
-//            sessionBean = (UserSessionBean) req.getSession().getAttribute("sessionBean");
+            req.getSession().setAttribute("sessionBean", sessionBean);
         }
         sessionBean.addNewResult(requestData);
-        sessionBean.addNewResult(new UserRequestData(1, 2, 3));
-        req.getSession().setAttribute("sessionBean", sessionBean);
 
         resp.sendRedirect(req.getContextPath() + "/resultPage.jsp");
     }

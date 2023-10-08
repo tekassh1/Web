@@ -19,6 +19,17 @@ public class UserRequestData implements Serializable {
         this.r = r;
     }
 
+    public UserRequestData(double x, double y, double r, long reqStartTime, String requestTime,
+                           String executionTime, boolean checkResult) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.reqStartTime = reqStartTime;
+        this.requestTime = requestTime;
+        this.executionTime = executionTime;
+        this.checkResult = checkResult;
+    }
+
     public double getX() {
         return x;
     }
