@@ -174,30 +174,29 @@
                     <th style="width: 30%">Execution time</th>
                 </tr>
 
-                <c:forEach items="${sessionBean.recentRequests}" var="request">
-                    <tr>
-                        <td>${request.x}</td>
-                        <td>${request.y}</td>
-                        <td>${request.r}</td>
-
-                        <c:choose>
-                            <c:when test="${request.checkResult == true}">
-                                <td>YES</td>
-                            </c:when>
-                            <c:otherwise>
-                                <td>NO</td>
-                            </c:otherwise>
-                        </c:choose>
-
-                        <td>${request.requestTime}</td>
-                        <td>${request.executionTime} ms</td>
-                    </tr>
-                </c:forEach>
-
                 <tbody id="mainTableBody">
+                    <c:forEach items="${sessionBean.recentRequests}" var="request">
+                        <tr>
+                            <td>${request.x}</td>
+                            <td>${request.y}</td>
+                            <td>${request.r}</td>
 
+                            <c:choose>
+                                <c:when test="${request.checkResult == true}">
+                                    <td>YES</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>NO</td>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <td>${request.requestTime}</td>
+                            <td>${request.executionTime} ms</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
+
         </div>
     </div>
 
