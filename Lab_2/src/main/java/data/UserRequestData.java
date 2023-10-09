@@ -9,12 +9,15 @@ public class UserRequestData implements Serializable {
 
     String requestTime;
     String executionTime;
+    String errorMsg;
     boolean checkResult;
+    int clicked;
 
-    public UserRequestData(double x, double y, double r) {
+    public UserRequestData(double x, double y, double r, int clicked) {
         this.x = x;
         this.y = y;
         this.r = r;
+        this.clicked = clicked;
     }
 
     public UserRequestData(double x, double y, double r, String requestTime,
@@ -73,5 +76,21 @@ public class UserRequestData implements Serializable {
 
     public void setCheckResult(boolean checkResult) {
         this.checkResult = checkResult;
+    }
+
+    public int getClicked() {
+        return clicked;
+    }
+
+    public void setClicked(int clicked) {
+        this.clicked = clicked;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

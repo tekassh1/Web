@@ -160,6 +160,27 @@
 
             <rect id="clickArea" width="100%" height="100%">
             </rect>
+
+            <%-- Clicked points --%>
+            <c:forEach items="${sessionBean.recentRequests}" var="point">
+                <c:if test="${point.clicked == '1'}">
+                    <c:choose>
+                        <c:when test="${point.checkResult == true}">
+                            <%-- Transformation to html area coords --%>
+                            <circle
+                                    cx="${point.x * (220/point.r) + 250}"
+                                    cy="${-(point.y * (220/point.r) - 250)}"
+                                    r="5" fill="#72be00"></circle>
+                        </c:when>
+                        <c:otherwise>
+                            <circle
+                                    cx="${point.x * (220/point.r) + 250}"
+                                    cy="${(point.y * (220/point.r) - 250) * (-1)}"
+                                    r="5" fill="red"></circle>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </c:forEach>
         </svg>
 
         <div class="tableBlock">

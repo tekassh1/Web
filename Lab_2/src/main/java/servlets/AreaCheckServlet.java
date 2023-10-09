@@ -11,7 +11,6 @@ import util.AreaValidator;
 import util.InputValidator;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "areaCheckServlet", urlPatterns = "/WEB-INF/checker")
 @MultipartConfig
@@ -27,17 +26,18 @@ public class AreaCheckServlet extends HttpServlet {
             x = Double.parseDouble(req.getParameter("x"));
             y = Double.parseDouble(req.getParameter("y"));
             r = Double.parseDouble(req.getParameter("r"));
+            int clicked = Integer.parseInt(req.getParameter("clicked"));
 
-            UserRequestData requestData = new UserRequestData(x, y, r);
+            UserRequestData requestData = new UserRequestData(x, y, r, clicked);
 
-            if (!InputValidator.validateValues(requestData)) throw new NumberFormatException();
+            if (!InputValidator.validateInput(requestData)) throw new NumberFormatException();
+            requestData.setClicked(clicked);
 
             generateResponsePage(requestData, req, resp);
         }
         catch (NumberFormatException e) {
-            PrintWriter writer = resp.getWriter();
-            writer.write("Error ebaniy!");
-            writer.close();
+            req.getSession().setAttribute("errorMsg", "400 Bad Request");
+            resp.sendRedirect(req.getContextPath() + "/error");
         }
     }
 

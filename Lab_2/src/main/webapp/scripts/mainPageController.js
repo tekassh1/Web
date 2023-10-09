@@ -158,71 +158,32 @@ clickArea.onclick = function (e) {
     let xCoord = ((areaClickedX - 250)/scaleCoefficient).toFixed(2);   // Coords in coordinate system
     let yCoord = ((250 - areaClickedY)/scaleCoefficient).toFixed(2);
 
-    alert(`Xcoord: ${xCoord}, Ycoord: ${yCoord}`);
-    let insertDot = `<circle cx=\"${cursorPoint.x}\" cy=\"${cursorPoint.y}\" r=\"5\" fill=\"red\" />`
-    coordinatePlane.insertAdjacentHTML("afterbegin", insertDot);
+    sendRequest(xCoord, yCoord, rVal, 1);
 }
 
-checkBtn.addEventListener("click", () => {
+checkBtn.onclick = function (e) {
     if (!checkX() || !checkY() || !checkR()) return;
-    checkValues();
-});
+    sendFormRequest();
+};
 
-let tableBody = document.getElementById("mainTableBody");
-let tableContent = [];
-
-function insertInTable(json) {
-    tableBody.insertAdjacentHTML("afterbegin",
-        "<tr>" +
-        "<td>" + json.x + "</td>" +
-        "<td>" + json.y + "</td>" +
-        "<td>" + json.r + "</td>" +
-        "<td>" + json.result + "</td>" +
-        "<td>" + json.requestTime + "</td>" +
-        "<td>" + json.executing + " ms</td>" +
-        "</tr>");
-}
-
-async function checkValues(){
+function sendFormRequest(){
     let form = document.getElementById("mainForm");
     let data = new FormData(form);
+    sendRequest(data.get("xChoosing"), data.get("yChoosing"), data.get("rChoosing"), 0);
+}
 
-    let requestTime = new Date().toLocaleString();
-
+async function sendRequest(x, y, r, clicked) {
     let serverControllerUrl = new URL("http://localhost:8080/Lab_2-1.0-SNAPSHOT/controller");
-    serverControllerUrl.searchParams.set("x", data.get("xChoosing"));
-    serverControllerUrl.searchParams.set("y", data.get("yChoosing"));
-    serverControllerUrl.searchParams.set("r", data.get("rChoosing"));
+    serverControllerUrl.searchParams.set("x", x);
+    serverControllerUrl.searchParams.set("y", y);
+    serverControllerUrl.searchParams.set("r", r);
+    serverControllerUrl.searchParams.set("clicked", clicked);
 
     let response = await fetch(serverControllerUrl, {
         method: 'GET'
     });
 
-    location.reload();
     if (response.redirected) {
         window.location.href = response.url;
     }
-}
-
-function loadTableCache() {
-    let cache = JSON.parse(localStorage.getItem("requests"));
-    if (cache == null || cache.length === 0) return;
-    let now = new Date().getTime();
-
-    for (let elem of cache) {
-        if (now < elem["expiry"]) {
-            insertInTable(elem);
-            tableContent.push(elem);
-        }
-    }
-}
-
-loadTableCache();
-
-function cacheTable(){
-    localStorage.setItem("requests", JSON.stringify(tableContent));
-}
-
-window.onbeforeunload = function () {
-    cacheTable();
 }

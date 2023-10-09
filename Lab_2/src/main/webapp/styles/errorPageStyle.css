@@ -120,52 +120,36 @@ header .expandAuthor .img {
     }
 }
 
-#mainBlock {
-    position: relative;
-    text-align: center;
-    box-sizing: border-box;
+/*#mainBlock {*/
+/*    margin-right: 25%;*/
+/*    margin-top: 15%;*/
+/*    margin-left: 25%;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+#errorBlock {
+    margin-top: 15%;
+    padding-left: 33%;
+    align-items: center;
 }
 
-#requestData {
-    align-content: center;
-    box-sizing: border-box;
-    padding-bottom: 15px;
-    padding-top: 5px;
-    margin: 1% 10% 1% 10%;
-    text-align: center;
-    background-color: white;
-    border-radius: 15px;
+#errorImg {
+    display: inline-block;
 }
 
-table {
-    padding-top: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#goBackButton {
-    /*to center button*/
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+#errorMsgBlock {
+    margin-top: 5%;
     position: absolute;
-
-    bottom: 0;
-    margin-bottom: 2%;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    background-color: #0076d2;
-    border-style: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20%;
-    height: 40px;
+    margin-left: 3%;
+    display: inline-block;
 }
 
-#goBackButton:hover {
-    background-color: #006abe;
+#errorLabel {
+    display: block;
+}
+
+#errorMsg {
+    display: block;
 }
 
 footer {
