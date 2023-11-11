@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee474edf-b504-4b59-a149-f9f5d84dc81d" name="Changes" comment="ITMO version (css in html file)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checker.php" beforeDir="false" afterPath="$PROJECT_DIR$/checker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab_2/src/main/webapp/scripts/mainPageController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab_2/src/main/webapp/scripts/mainPageController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +87,7 @@
       <workItem from="1694078191045" duration="129000" />
       <workItem from="1694716378782" duration="1393000" />
       <workItem from="1694760195425" duration="3903000" />
+      <workItem from="1696934391442" duration="32000" />
     </task>
     <task id="LOCAL-00003" summary="ITMO version (css in html file)">
       <option name="closed" value="true" />
@@ -115,7 +114,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/scripts/mainController.js</url>
-          <line>43</line>
+          <line>42</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
