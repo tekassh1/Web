@@ -7,8 +7,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <head>
-    <title>Web First</title>
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.svg"/>
+    <title>Web 3</title>
+    <link rel="icon" type="image/x-icon" href="#{resource['images/favicon.svg']}"/>
     <link rel="stylesheet" type="text/css" href="styles/mainPageStyle.css"/>
 
     <!-- Fonts -->
@@ -25,12 +25,12 @@
                         id="logo" class="logo" alt="userIcon"/>
 
         <button id="expandButton" class="expandAuthor">
-            <h:graphicImage value="${pageContext.request.contextPath}/resources/images/arrow-down.svg"
+            <h:graphicImage value="${pageContext.request.contextPath}/resources/images/arrow-down2.svg"
                             id="arrow" class="img" alt="expandAuthorIcon"/>
         </button>
 
         <div id="expanded" class="infoText">
-            <p>Student:<a class="colourfulText"> Kuznetsov Daniil</a></p>
+            <p style="margin-top: 13px;">Student:<a class="colourfulText"> Kuznetsov Daniil</a></p>
             <p>Group:<a class="colourfulText"> P3234</a></p>
             <p>Variant:<a class="colourfulText"> 55555</a></p>
             <br/>
@@ -39,75 +39,79 @@
     </header>
 
     <div class="controlPanel">
-        <form id="mainForm">
+        <h:form id="mainForm">
 
-            <fieldset style="display: inline-block; padding-top: 10px;" class="xSelectionPanel">
+            <div class="xSelectionPanel">
                 Select<a class="colourfulText"> X </a>value<br/>
 
-                <input class="xButtons" type="radio" value="-2" id="m2X" name="xChoosing"/>
-                <label class="xLabels" for="m2X">-2</label><br/>
+                <div id="xButtonsBlock">
+                    <h:commandButton type="button" value = "-5" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "-4" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "-3" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "-2" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "-1" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "0" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "1" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "2" styleClass="xButton"/>
+                    <h:commandButton type="button" value = "3" styleClass="xButton"/>
 
-                <input class="xButtons" type="radio" value="-1.5" id="m15X" name="xChoosing"/>
-                <label class="xLabels" for="m15X">-1.5</label><br/>
+                    <h:inputText
+                            value="#{pointChecker.x}"
+                            style="display: none"
+                            id="xField"
+                            required="true"
+                            requiredMessage="You should select X value"
+                            converterMessage="X value should be an integer number"
+                            validatorMessage="X value should be in range (#{pointChecker.xMin}, #{pointChecker.xMax})">
 
-                <input class="xButtons" type="radio" value="-1" id="m1X" name="xChoosing"/>
-                <label class="xLabels" for="m1X">-1</label><br/>
-
-                <input class="xButtons" type="radio" value="-0.5" id="m05X" name="xChoosing"/>
-                <label class="xLabels" for="m05X">-0.5</label><br/>
-
-                <input class="xButtons" type="radio" value="0" id="0X" name="xChoosing"/>
-                <label class="xLabels" for="0X">0</label><br/>
-
-                <input class="xButtons" type="radio" value="0.5" id="05X" name="xChoosing"/>
-                <label class="xLabels" for="05X">0.5</label><br/>
-
-                <input class="xButtons" type="radio" value="1" id="1X" name="xChoosing"/>
-                <label class="xLabels" for="1X">1</label><br/>
-
-                <input class="xButtons" type="radio" value="1.5" id="15X" name="xChoosing"/>
-                <label class="xLabels" for="15X">1.5</label><br/>
-
-                <input class="xButtons" type="radio" value="2" id="2X" name="xChoosing"/>
-                <label class="xLabels" for="2X">2</label><br/>
-            </fieldset>
+                        <f:validateLongRange minimum = "#{pointChecker.xMin}" maximum = "#{pointChecker.xMax}"/>
+                        <f:validateLength minimum = "1" maximum = "15"/>
+                    </h:inputText>
+                </div>
+                <h:message showSummary="true" showDetail="false" styleClass="incorrectInputText" for="xField"/>
+            </div>
 
             <div class="ySelectionPanel">
                 Enter <a class="colourfulText">Y</a> value
                 <label style="box-sizing: border-box">
                     <br/>
-                    <input id="yField" type="text" style="height: 30px" name="yChoosing" maxlength="15"/>
+                    <h:inputText id="yField"
+                                 maxlength="15"
+                                 value="#{pointChecker.y}"
+                                 required="true"
+                                 requiredMessage="You should select Y value"
+                                 validatorMessage="Y value should be in range
+                                    (#{pointChecker.yMin}, #{pointChecker.yMax})"
+                                 converterMessage="Y value should be an integer number">
+
+                        <f:validateLongRange minimum = "#{pointChecker.yMin}" maximum = "#{pointChecker.yMax}"/>
+                        <f:validateLength minimum = "1" maximum = "15"/>
+                    </h:inputText>
                 </label>
+                <h:message showSummary="true" showDetail="false" styleClass="incorrectInputText" for="yField"/>
             </div>
 
-            <fieldset style="border-width: 0;" class="rSelectionPanel">
-                Select<a class="colourfulText"> R </a>value<br/><br/>
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="1" id="r1"/>
-                <label style="padding-right: 1.5%;" for="r1">1</label>
+            <div class="rSelectionPanel">
+                Select<a class="colourfulText"> R </a>value
 
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="2" id="r2"/>
-                <label style="padding-right: 1.5%;" for="r2">2</label>
+                <h:selectOneRadio id="rFields" value = "#{pointChecker.r}" required="true"
+                                  requiredMessage="You should select one R value">
 
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="3" id="r3"/>
-                <label style="padding-right: 1.5%;" for="r3">3</label>
-
-                <input class="rButtons" style="padding-left: 1.5%;" type="checkbox" name="rChoosing" value="4" id="r4"/>
-                <label style="padding-right: 1.5%;" for="r4">4</label>
-
-                <input class="rButtons" type="checkbox" name="rChoosing" value="5" id="r5"/>
-                <label for="r5">5</label>
-            </fieldset>
-
-        </form>
-
-<!--        name="requestButtonsBlock"-->
-        <div>
-            <h5 id="incorrectInputText">Wrong data!</h5>
-            <button id="checkRequestButton">Check point</button>
-            <br/>
-            <button id="resetRequestButton">Reset values</button>
-        </div>
-
+                    <f:selectItem itemValue = "1" itemLabel = "1" />
+                    <f:selectItem itemValue = "2" itemLabel = "2" />
+                    <f:selectItem itemValue = "3" itemLabel = "3" />
+                    <f:selectItem itemValue = "4" itemLabel = "4" />
+                    <f:selectItem itemValue = "5" itemLabel = "5" />
+                </h:selectOneRadio>
+                <h:message showSummary="true" showDetail="false" styleClass="incorrectInputText" for="rFields"/>
+            </div>
+            <div class="submitButtonsBlock">
+                <h:commandButton styleClass="checkRequestButton" value="Check point"
+                                 action="#{pointChecker.goToResultPage()}"/>
+                <br/>
+                <h:commandButton styleClass="resetRequestButton" value="Reset values"/>
+            </div>
+        </h:form>
     </div>
 
     <div class="secondaryPanel">
@@ -149,20 +153,20 @@
         <text class="R" x="260" y="35">R</text>
 
         <!-- Figures -->
-        <polygon points="250 250, 250 140, 30 250" fill="blue" opacity="0.2"/>
-        <rect x="250" y="140" width="220" height="110" fill="blue" opacity="0.2"/>
-        <path d="M 250 250
-               L 30 250
-               A 220 220 0 0 0 250 470
-               L 250 250"
-              fill="blue" opacity="0.2"/>
+        <polygon points="250 30, 250 250, 360 250" fill="blue" opacity="0.2"/>
+        <rect x="140" y="30" width="110" height="220" fill="blue" opacity="0.2"/>
+            <path d="M 250 250
+                     L 140 250
+                     A 110 110 0 0 0 250 360
+                     L 250 250"
+                  fill="blue" opacity="0.2"/>
 
         <rect id="clickArea" width="100%" height="100%">
         </rect>
         </svg>
 
         <div class="tableBlock">
-            <label style="width: 100%; float:left; padding-top: 5px; color: #72be00">Recent results</label>
+            <label style="width: 100%; float:left; padding-top: 5px; color: #379a76;">Recent results</label>
             <table>
                 <tr>
                     <th style="width: 7%;">X</th>
@@ -194,7 +198,5 @@
 <script src="scripts/mainPageController.js"></script>
 
 </body>
-
-
 
 </html>
