@@ -1,11 +1,7 @@
 package application;
 
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.validator.FacesValidator;
-import jakarta.faces.validator.Validator;
-import jakarta.faces.validator.ValidatorException;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,14 +9,13 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-@FacesValidator
-public class PointChecker implements Serializable, Validator {
+public class PointChecker implements Serializable {
 
     @NotNull(message = "Request should contains \"x\" value")
-    private Integer x;
+    private Double x = (double) 0;
 
     @NotNull(message = "Request should contains \"y\" value")
-    private Integer y;
+    private Double y;
 
     @NotNull(message = "Request should contains \"r\" value")
     private Integer r;
@@ -34,22 +29,22 @@ public class PointChecker implements Serializable, Validator {
     private final Integer rMax = 5;
 
     public String goToResultPage(){
-        return "WEB-INF/testPage";
+        return "testPage.xhtml?faces-redirect=true";
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(Integer x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(Integer y) {
+    public void setY(Double y) {
         this.y = y;
     }
 
@@ -83,10 +78,5 @@ public class PointChecker implements Serializable, Validator {
 
     public Integer getrMax() {
         return rMax;
-    }
-
-    @Override
-    public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-
     }
 }
