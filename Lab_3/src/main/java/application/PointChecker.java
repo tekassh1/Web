@@ -1,7 +1,6 @@
 package application;
 
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,7 +11,7 @@ import java.io.Serializable;
 public class PointChecker implements Serializable {
 
     @NotNull(message = "Request should contains \"x\" value")
-    private Double x = (double) 0;
+    private Double x;
 
     @NotNull(message = "Request should contains \"y\" value")
     private Double y;
@@ -29,7 +28,7 @@ public class PointChecker implements Serializable {
     private final Integer rMax = 5;
 
     public String goToResultPage(){
-        return "testPage.xhtml?faces-redirect=true";
+        return "testPage?faces-redirect=true";
     }
 
     public Double getX() {

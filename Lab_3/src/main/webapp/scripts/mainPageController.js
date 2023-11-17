@@ -81,6 +81,7 @@ window.onload = function () {
 let resetBtn = document.getElementById("mainForm:resetRequestButton");
 
 function resetValues() {
+    clearSelectedX();
     yField.value = "";
     clearSelectedR();
 }
