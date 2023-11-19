@@ -1,7 +1,12 @@
 package application;
 
+import integration.DatabaseManager;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
@@ -27,7 +32,17 @@ public class PointChecker implements Serializable {
     private final Integer yMax = 5;
     private final Integer rMax = 5;
 
+    @Inject
+    DatabaseManager databaseManager;
+
+
     public String goToResultPage(){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
+        String sessionId = session.getId();
+
+        System.out.println(sessionId);
+        System.out.println(databaseManager.getEntityManager());
         return "testPage?faces-redirect=true";
     }
 
