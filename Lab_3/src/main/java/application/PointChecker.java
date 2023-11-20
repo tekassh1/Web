@@ -1,7 +1,6 @@
 package application;
 
 import integration.DatabaseManager;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -34,7 +33,6 @@ public class PointChecker implements Serializable {
 
     @Inject
     DatabaseManager databaseManager;
-
 
     public String goToResultPage(){
         FacesContext ctx = FacesContext.getCurrentInstance();

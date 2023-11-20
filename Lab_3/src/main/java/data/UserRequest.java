@@ -1,30 +1,42 @@
 package data;
 
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
-//@Entity
-//@Table(name = "user_requests")
+@Entity
+@Table(name = "user_requests")
 public class UserRequest {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
 
-    String sessionId;
-
+    @Column(name = "x", nullable = false)
     private Double x;
+
+    @Column(name = "y", nullable = false)
     private Double y;
+
+    @Column(name = "r", nullable = false)
     private Integer r;
 
+    @Column(name = "result", nullable = false)
     private boolean result;
+
+    @Column(name = "request_time", nullable = false)
     Timestamp requestTime;
+
+    @Column(name = "executeion_time", nullable = false)
     double executionTime;
 
-    public String getSessionId() {
-        return sessionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getX() {
