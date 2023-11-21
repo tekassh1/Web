@@ -1,7 +1,9 @@
 package data;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,19 +14,15 @@ public class ActiveSession {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "session_id")
+    @Column(name = "session_id", unique = true)
     private String sessionID;
 
-    @OneToMany
-    @JoinColumn(name = "session_id")
-    private Set<UserRequest> requests;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "session_id", nullable = false)
+    private Set<UserRequest> requests = new HashSet<>();
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getSessionID() {

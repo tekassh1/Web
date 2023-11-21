@@ -1,14 +1,14 @@
 package application;
 
-import integration.DatabaseManager;
+import data.UserRequest;
+import integration.ActiveSessionsDao;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Named
 @SessionScoped
@@ -31,17 +31,53 @@ public class PointChecker implements Serializable {
     private final Integer yMax = 5;
     private final Integer rMax = 5;
 
+    private Timestamp requestTime;
+    private long requestStartedTime;
+
     @Inject
-    DatabaseManager databaseManager;
+    DataValidator dataValidator;
+    @Inject
+    ActiveSessionsDao activeSessionsDao;
 
-    public String goToResultPage(){
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) ctx.getExternalContext().getSession(false);
-        String sessionId = session.getId();
+    public String processRequest(){
+        startTimer();
 
-        System.out.println(sessionId);
-        System.out.println(databaseManager.getEntityManager());
+        if (!dataValidator.isDataCorrect(x, y, r)) return "errorPage?faces-redirect=true";
+        boolean result = isPointInArea(x, y, r);
+
+        UserRequest request = new UserRequest();
+        request.setRequestTime(requestTime);
+        request.setX(x);
+        request.setY(y);
+        request.setR(r);
+        request.setResult(result);
+        double duration = requestStartedTime - System.currentTimeMillis();
+        request.setExecutionTime(duration);
+
+        activeSessionsDao.saveRequest(request);
+
         return "testPage?faces-redirect=true";
+    }
+
+    private void startTimer(){
+        requestStartedTime = System.currentTimeMillis();
+        requestTime = new Timestamp(requestStartedTime);
+    }
+
+    private boolean isPointInArea(Double x, Double y, Integer r) {
+        return checkRectangle(x, y, r) || checkTriangle(x, y, r) || checkArc(x, y, r);
+    }
+
+    private boolean checkRectangle(Double x, Double y, Integer r){
+        return x <= 0 && x >= ((double) -r /2) && y <= r && y >= 0;
+    }
+
+    private boolean checkTriangle(Double x, Double y, Integer r) {
+        return x >= 0 && y >= 0 && y <= (r - 2*x);
+    }
+
+    private boolean checkArc(Double x, Double y, Integer r) {
+        return x <= 0 && y <= 0 && (Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2));
     }
 
     public Double getX() {

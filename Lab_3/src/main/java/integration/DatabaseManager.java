@@ -26,11 +26,7 @@ public class DatabaseManager {
         }
     }
 
-    public EntityManagerFactory getEmf() {
-        return emf;
-    }
-
-    public EntityManager getEntityManager() {
+    public synchronized EntityManager generateEntityManager(){
         return emf.createEntityManager();
     }
 
