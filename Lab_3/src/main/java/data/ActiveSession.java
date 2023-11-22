@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,7 @@ import java.util.List;
 public class ActiveSession {
     @Id
     @GeneratedValue
+    @SequenceGenerator(name = "active_session_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
@@ -21,7 +23,7 @@ public class ActiveSession {
     @OneToMany(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "session_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<UserRequest> requests = new ArrayList<>();
+    private List<UserRequest> requests = new LinkedList<>();
 
     public Long getId() {
         return id;
@@ -40,6 +42,6 @@ public class ActiveSession {
     }
 
     public void addRequest(UserRequest request) {
-        requests.add(request);
+        requests.add(0, request);
     }
 }

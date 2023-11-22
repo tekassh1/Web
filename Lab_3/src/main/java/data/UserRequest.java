@@ -10,6 +10,7 @@ public class UserRequest {
 
     @Id
     @GeneratedValue
+    @SequenceGenerator(name = "user_requests_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
@@ -23,20 +24,20 @@ public class UserRequest {
     private Integer r;
 
     @Column(name = "result", nullable = false)
-    private boolean result;
+    private Boolean result;
 
     @Column(name = "request_time", nullable = false)
     private Timestamp requestTime;
 
     @Column(name = "executeion_time", nullable = false)
-    private double executionTime;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Double executionTime;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getX() {
@@ -63,11 +64,11 @@ public class UserRequest {
         this.r = r;
     }
 
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 
-    public void setResult(boolean result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 
@@ -79,7 +80,7 @@ public class UserRequest {
         this.requestTime = requestTime;
     }
 
-    public double getExecutionTime() {
+    public Double getExecutionTime() {
         return executionTime;
     }
 

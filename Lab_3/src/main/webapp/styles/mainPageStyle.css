@@ -320,7 +320,7 @@ div[name="requestButtonsBlock"] {
 }
 
 #mainForm\:resetRequestButton:hover {
-    background-color: #7c2b1d;
+    background-color: #963323;
     opacity: 0.9;
 }
 
@@ -360,6 +360,21 @@ div[name="requestButtonsBlock"] {
     background-color: white;
 }
 
+.tableBlock label {
+    width: 100%;
+    float:left;
+    padding-top: 5px;
+    color: #72be00
+}
+
+.execTime {
+    width: 30%;
+}
+
+.tableBlock tbody {
+    width: 100%;
+}
+
 /*Child elements selector*/
 .secondaryPanel .tableBlock > table {
     overflow-y: auto;
@@ -371,10 +386,6 @@ div[name="requestButtonsBlock"] {
     width: 100%;
     min-height: 200px;
     max-height: 200px;
-}
-
-#mainTableBody {
-    width: 100%;
 }
 
 footer {

@@ -36,10 +36,6 @@ public class ActiveSessionsDao implements Serializable {
         sessionKey = currentSession.getId();
     }
 
-    public List<ActiveSession> getActive() {
-        return em.createQuery("FROM ActiveSession a", ActiveSession.class).getResultList();
-    }
-
     public List<UserRequest> getRequests() {
         ActiveSession session = em.find(ActiveSession.class, sessionKey);
         return session.getRequests();

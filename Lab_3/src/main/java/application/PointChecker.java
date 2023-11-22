@@ -2,7 +2,6 @@ package application;
 
 import data.UserRequest;
 import integration.ActiveSessionsDao;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -10,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Named
 @SessionScoped
@@ -35,6 +35,8 @@ public class PointChecker implements Serializable {
     private Timestamp requestTime;
     private long requestStartedTime;
 
+    private boolean clicked = false;
+
     @Inject
     DataValidator dataValidator;
     @Inject
@@ -57,7 +59,12 @@ public class PointChecker implements Serializable {
 
         activeSessionsDao.saveRequest(request);
 
-        return "testPage?faces-redirect=true";
+        clicked = false;
+        return "main?faces-redirect=true";
+    }
+
+    public List<UserRequest> getRequests(){
+        return activeSessionsDao.getRequests();
     }
 
     private void startTimer(){
@@ -78,7 +85,15 @@ public class PointChecker implements Serializable {
     }
 
     private boolean checkArc(Double x, Double y, Integer r) {
-        return x <= 0 && y <= 0 && (Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2));
+        return x <= 0 && y <= 0 && ((Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r/2.0, 2));
+    }
+
+    public boolean getClicked() {
+        return clicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
     }
 
     public Double getX() {
