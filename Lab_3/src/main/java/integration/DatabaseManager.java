@@ -9,13 +9,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 
-@Named
-@ApplicationScoped
-public class DatabaseManager {
-    private EntityManagerFactory emf;
+public class DatabaseManager implements AutoCloseable {
+    private static EntityManagerFactory emf;
 
-    @PostConstruct
-    public void init() {
+    static {
         try {
             emf = Persistence.createEntityManagerFactory("mainUnit");
             if (emf == null) throw new PersistenceException();
@@ -26,12 +23,12 @@ public class DatabaseManager {
         }
     }
 
-    public synchronized EntityManager generateEntityManager(){
+    public static synchronized EntityManager generateEntityManager(){
         return emf.createEntityManager();
     }
 
-    @PreDestroy
-    public void closeConnection(){
+    @Override
+    public void close() {
         if (emf!= null && emf.isOpen())
             emf.close();
     }

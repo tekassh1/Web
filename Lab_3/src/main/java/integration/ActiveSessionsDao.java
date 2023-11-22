@@ -6,32 +6,19 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Named
 @SessionScoped
 public class ActiveSessionsDao implements Serializable {
-    @Inject
-    private DatabaseManager dbManager;
-
     private EntityManager em;
 
-    private String sessionId;
-
-    @PostConstruct
-    public void init(){
-        em = dbManager.generateEntityManager();
-        sessionId = getSessionId();
-    }
+    private Long sessionKey;
 
     private String getSessionId() {
         FacesContext ctx = FacesContext.getCurrentInstance();
@@ -39,46 +26,37 @@ public class ActiveSessionsDao implements Serializable {
         return session.getId();
     }
 
-    public List<ActiveSession> getActive() {
-        return em.createQuery("SELECT a from ActiveSession a", ActiveSession.class).getResultList();
+    @PostConstruct
+    public void init(){
+        em = DatabaseManager.generateEntityManager();
+
+        ActiveSession currentSession = new ActiveSession();
+        currentSession.setSessionID(getSessionId());
+        em.persist(currentSession);
+        sessionKey = currentSession.getId();
     }
 
-    public Set<UserRequest> getRequests() {
+    public List<ActiveSession> getActive() {
+        return em.createQuery("FROM ActiveSession a", ActiveSession.class).getResultList();
+    }
 
-        Query query = em.createQuery("FROM ActiveSession where sessionID=:sessionId")
-                .setParameter("sessionId", sessionId);
-        ActiveSession sessionObj = (ActiveSession) query.getSingleResult();
-
-        return sessionObj.getRequests();
+    public List<UserRequest> getRequests() {
+        ActiveSession session = em.find(ActiveSession.class, sessionKey);
+        return session.getRequests();
     }
 
     public void saveRequest(UserRequest request) {
         em.getTransaction().begin();
-
-        ActiveSession currentSession;
-        Query query = em.createQuery("FROM ActiveSession where sessionID=:sessionId")
-                .setParameter("sessionId", sessionId);
-        try {
-            currentSession = (ActiveSession) query.getSingleResult();
-        }
-        catch (NoResultException e) {
-            currentSession = new ActiveSession();
-            currentSession.setSessionID(sessionId);
-            em.persist(currentSession);
-        }
-        currentSession.getRequests().add(request);
-
+        ActiveSession currentSession = em.find(ActiveSession.class, sessionKey);
+        currentSession.addRequest(request);
         em.getTransaction().commit();
     }
 
     @PreDestroy
     public void removeActive() {
         em.getTransaction().begin();
-
-        em.createQuery("delete from ActiveSession a where a.sessionID=:sessionID")
-                .setParameter("sessionID", sessionId)
-                .executeUpdate();
-
+        ActiveSession currentSession = em.find(ActiveSession.class, sessionKey);
+        if (currentSession != null) em.remove(currentSession);
         em.getTransaction().commit();
     }
 }

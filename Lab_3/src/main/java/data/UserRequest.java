@@ -26,10 +26,14 @@ public class UserRequest {
     private boolean result;
 
     @Column(name = "request_time", nullable = false)
-    Timestamp requestTime;
+    private Timestamp requestTime;
 
     @Column(name = "executeion_time", nullable = false)
-    double executionTime;
+    private double executionTime;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

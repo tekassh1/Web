@@ -2,6 +2,7 @@ package application;
 
 import data.UserRequest;
 import integration.ActiveSessionsDao;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

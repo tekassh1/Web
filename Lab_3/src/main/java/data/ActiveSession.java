@@ -1,10 +1,11 @@
 package data;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "active_sessions")
@@ -17,9 +18,10 @@ public class ActiveSession {
     @Column(name = "session_id", unique = true)
     private String sessionID;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "session_id", nullable = false)
-    private Set<UserRequest> requests = new HashSet<>();
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<UserRequest> requests = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -33,11 +35,11 @@ public class ActiveSession {
         this.sessionID = sessionID;
     }
 
-    public Set<UserRequest> getRequests() {
+    public List<UserRequest> getRequests() {
         return requests;
     }
 
-    public void setRequests(Set<UserRequest> requests) {
-        this.requests = requests;
+    public void addRequest(UserRequest request) {
+        requests.add(request);
     }
 }
