@@ -106,20 +106,57 @@ header .expandAuthor .img {
     display: grid;
     grid-template-areas:
     "header"
-    "control"
-    "secondary"
+    "body"
     "footer";
 }
 
-@media (min-width: 1000px) {
-    .wrapper {
-        grid-template-rows: max-content auto min-content;
-        grid-template-columns: 6fr 3fr;
-        grid-template-areas:
-            "header header"
-            "control secondary"
-            "footer footer";
+#mainPanel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clock {
+    margin-top: 13%;
+    font-size: 40px;
+    text-align: center;
+
+    #d {
+        color: #0077ed;
     }
+    #s {
+        color: #0077ed;
+    }
+}
+
+#fantonForm {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+#buttonWrapper {
+    margin-bottom: 5%;
+    text-align: center;
+    width: 100%;
+    margin-top: 18%;
+}
+
+#goMainButton {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: #0077ed;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 15%;
+    height: 40px;
+}
+
+#goMainButton:hover {
+    background-color: #006cd7;
 }
 
 footer {

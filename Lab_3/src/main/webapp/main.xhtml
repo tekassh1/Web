@@ -23,8 +23,11 @@
     <div class="wrapper">
         <header class="header">
             <h2 class="label">LAB 3</h2>
-            <h:graphicImage value="${pageContext.request.contextPath}/resources/images/main2.svg"
-                            id="logo" class="logo" alt="userIcon"/>
+
+            <h:link outcome="goStart">
+                <h:graphicImage value="${pageContext.request.contextPath}/resources/images/main2.svg"
+                                id="logo" class="logo" alt="userIcon"/>
+            </h:link>
 
             <button id="expandButton" class="expandAuthor">
                 <h:graphicImage value="${pageContext.request.contextPath}/resources/images/arrow-down2.svg"
