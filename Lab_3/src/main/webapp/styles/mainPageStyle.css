@@ -324,15 +324,16 @@ div[name="requestButtonsBlock"] {
     opacity: 0.9;
 }
 
-.secondaryPanel {
+#secondaryPanel {
+    display: flex;
     box-sizing: border-box;
-
     border-radius: 15px;
     grid-area: secondary;
     margin: 20px;
+    flex-direction: column;
 }
 
-#coordinatePlane {
+#svgDiv {
     float: left;
     display: block;
     box-sizing: border-box;
@@ -348,6 +349,7 @@ div[name="requestButtonsBlock"] {
 }
 
 .tableBlock {
+    height: 100%;
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
@@ -376,7 +378,7 @@ div[name="requestButtonsBlock"] {
 }
 
 /*Child elements selector*/
-.secondaryPanel .tableBlock > table {
+#secondaryPanel .tableBlock > table {
     overflow-y: auto;
     overflow-x: hidden;
     text-align: center;
@@ -396,7 +398,7 @@ footer {
     box-shadow: 0 0 15px 0 #e3e3e3;
     padding-top: 20px;
     color: white;
-    height: 90px;
+    height: 80px;
     /*background-color: #0076d2;*/
     background-color: #404040;
     text-align: center;

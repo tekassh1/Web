@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html style="height: 100%; width: 100%" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <title>Web 3</title>
+    <link rel="icon" type="image/x-icon" href="#{resource['images/favicon.svg']}"/>
+    <link rel="stylesheet" type="text/css" href="styles/welcomePageStyle.css"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&#38;display=swap" rel="stylesheet"/>
+</h:head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h2 class="label">LAB 3</h2>
+            <h:graphicImage value="${pageContext.request.contextPath}/resources/images/main2.svg"
+                            id="logo" class="logo" alt="userIcon"/>
+
+            <button id="expandButton" class="expandAuthor">
+                <h:graphicImage value="${pageContext.request.contextPath}/resources/images/arrow-down2.svg"
+                                id="arrow" class="img" alt="expandAuthorIcon"/>
+            </button>
+
+            <div id="expanded" class="infoText">
+                <p style="margin-top: 13px;">Student:<a class="colourfulText"> Kuznetsov Daniil</a></p>
+                <p>Group:<a class="colourfulText"> P3234</a></p>
+                <p>Variant:<a class="colourfulText"> 55555</a></p>
+                <br/>
+            </div>
+        </header>
+
+        <div id="mainPanel">
+
+        </div>
+
+        <footer>
+            &#169; Goovnocode inc. 2023
+            <br/>
+            <a href="https://github.com/tekassh1" target="_blank">
+                <h:graphicImage value="${pageContext.request.contextPath}/resources/images/github2.svg"
+                                class="github" alt="githubLogo"/>
+            </a>
+        </footer>
+
+    </div>
+
+<script src="scripts/headerController.js"></script>
+
+</body>
+</html>

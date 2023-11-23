@@ -9,6 +9,19 @@ window.addEventListener( "pageshow", function ( event ) {
     }
 });
 
+window.onload = function () {
+    let rVal = getRCheckedValue();
+    if (rVal != null) rVal.click();
+    showR();
+}
+
+let rMarkups = document.getElementsByClassName("markup");
+
+function showR() {
+    for (let markup of rMarkups)
+        markup.style.visibility = "visible";
+}
+
 let xButtons = document.getElementsByClassName("xButton");
 let xField = document.getElementById("mainForm:xField");
 let yField = document.getElementById("mainForm:yField");
@@ -52,6 +65,8 @@ function setRValues() {
     R[1].textContent = rVal;
     R2[0].textContent = (rVal/2).toFixed(2);
     R2[1].textContent = (rVal/2).toFixed(2);
+
+    scaleCoords(this.value);
 }
 
 function clearSelectedR() {
@@ -71,11 +86,6 @@ function clearSelectedR() {
 
 for (let i = 0; i < rButtons.length; i++) {
     rButtons[i].addEventListener("click", setRValues);
-}
-
-window.onload = function () {
-    let rVal = getRCheckedValue();
-    if (rVal != null) rVal.click();
 }
 
 let resetBtn = document.getElementById("mainForm:resetRequestButton");
@@ -133,4 +143,65 @@ clickArea.onclick = function (e) {
     yField.value = yCoord;
 
     sendRequestButton.click();
+}
+
+let planeDots = document.getElementById("planeDots");
+
+function scaleCoords(rChecked){
+    let points = document.getElementsByTagName("circle");
+
+    for (let point of points) {
+        let xCoord = + point.getAttribute("data-original-x");
+        let yCoord = + point.getAttribute("data-original-y");
+        let r = + point.getAttribute("data-radius");
+
+        let scale = r / rChecked;
+        let newXCoord = xCoord;
+        let newYCoord = yCoord;
+
+        if (xCoord > 250)
+            newXCoord = (xCoord - 250) * scale + 250;
+        else if (xCoord < 250)
+            newXCoord = 250 - (250 - xCoord) * scale;
+
+        if (yCoord > 250)
+            newYCoord = (yCoord - 250) * scale + 250;
+        else if (yCoord < 250)
+            newYCoord = 250 - (250 - yCoord) * scale;
+
+        point.setAttribute("cx", newXCoord.toString());
+        point.setAttribute("cy", newYCoord.toString());
+        checkHits();
+        planeDots.style.visibility = "visible";
+    }
+}
+
+function checkHits() {
+    let points = document.getElementsByTagName("circle");
+    for (let point of points) {
+        if (checkHit(point))
+            point.setAttribute("fill", "#0077ed")
+        else
+            point.setAttribute("fill", "red")
+    }
+}
+
+function checkHit(point) {
+    let x = + point.getAttribute("cx");
+    let y = + point.getAttribute("cy");
+    return checkRectangle(x, y) || checkTriangle(x, y) || checkCircle(x, y);
+}
+
+function checkRectangle(x, y) {
+    return y >= 30 && y <= 250 && x >= 140 && x<= 250;
+}
+
+function checkTriangle(x, y) {
+    return y <= 250 && y >= (2*x - 470) && x>= 250;
+}
+
+function checkCircle(x, y) {
+    let svgRadius = 110;
+    return y>= 0 && x <= 250 &&
+        (Math.pow(Math.abs(250 - x), 2) + Math.pow(y - 250, 2) <= Math.pow(svgRadius, 2));
 }

@@ -3,12 +3,15 @@ package application;
 import data.UserRequest;
 import integration.ActiveSessionsDao;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -35,8 +38,6 @@ public class PointChecker implements Serializable {
     private Timestamp requestTime;
     private long requestStartedTime;
 
-    private boolean clicked = false;
-
     @Inject
     DataValidator dataValidator;
     @Inject
@@ -59,7 +60,6 @@ public class PointChecker implements Serializable {
 
         activeSessionsDao.saveRequest(request);
 
-        clicked = false;
         return "main?faces-redirect=true";
     }
 
@@ -86,14 +86,6 @@ public class PointChecker implements Serializable {
 
     private boolean checkArc(Double x, Double y, Integer r) {
         return x <= 0 && y <= 0 && ((Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r/2.0, 2));
-    }
-
-    public boolean getClicked() {
-        return clicked;
-    }
-
-    public void setClicked(boolean clicked) {
-        this.clicked = clicked;
     }
 
     public Double getX() {
