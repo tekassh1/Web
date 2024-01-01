@@ -1,9 +1,5 @@
 package integration;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -16,9 +12,11 @@ public class DatabaseManager implements AutoCloseable {
         try {
             emf = Persistence.createEntityManagerFactory("mainUnit");
             if (emf == null) throw new PersistenceException();
+            System.out.println("Database connected!");
         }
         catch (PersistenceException e) {
             System.err.println("Database connection error! Check credentials.");
+            System.out.println("Database error!");
             System.exit(1);
         }
     }
