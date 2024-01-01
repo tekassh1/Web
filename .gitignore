@@ -1,2 +1,7 @@
+*/.idea
 task_backups/
-Lab_4/frontend/node_modules/
+
+# Lab 4
+/dist
+Lab_4/frontend/node_modules
+Lab_4/frontend/.angular/cache
