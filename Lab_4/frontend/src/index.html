@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web 4</title>
+    <link rel="icon" type="image/x-icon" href="assets/common/favicon.svg">
+    <link rel="stylesheet" type="text/css" href="assets/common/styles/mainPageStyle.css"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&#38;display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <div id="pageWrapper">
+        <main-header
+                studentName="Kuznetsov Daniil"
+                variantNumber="511"
+                groupNumber="P3234">
+        </main-header>
+
+<!--        <div class="controlPanel">-->
+<!--            <form id="mainForm">-->
+
+<!--                <div class="xSelectionPanel">-->
+<!--                    Select<a class="colourfulText"> X </a>value<br/>-->
+
+<!--                    <div id="xButtonsBlock">-->
+<!--&lt;!&ndash;                        <button type="button" value = "-5" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "-4" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "-3" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "-2" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "-1" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "0" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "1" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "2" styleClass="xButton"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h:commandButton type="button" value = "3" styleClass="xButton"/>&ndash;&gt;-->
+
+<!--                        <input-->
+<!--                                value="#{pointChecker.x}"-->
+<!--                                style="display: none"-->
+<!--                                id="xField"-->
+<!--                                required="true"-->
+<!--                                requiredMessage="You should select X value"-->
+<!--                                converterMessage="X value should be a number"-->
+<!--                                validatorMessage="X value should be in range-->
+<!--                                (#{pointChecker.xMin}, #{pointChecker.xMax})">-->
+
+<!--                            <f:validateDoubleRange minimum = "#{pointChecker.xMin}" maximum = "#{pointChecker.xMax}"/>-->
+<!--                        </input>-->
+<!--                    </div>-->
+<!--                    <h:message id="vm1" styleClass="incorrectInputText" for="xField"/>-->
+<!--                </div>-->
+
+<!--                <div class="ySelectionPanel">-->
+<!--                    Enter <a class="colourfulText">Y</a> value-->
+<!--                    <label style="box-sizing: border-box">-->
+<!--                        <br/>-->
+<!--                        <h:inputText id="yField"-->
+<!--                                     maxlength="15"-->
+<!--                                     value="#{pointChecker.y}"-->
+<!--                                     required="true"-->
+<!--                                     requiredMessage="You should select Y value"-->
+<!--                                     validatorMessage="Y value should be in range-->
+<!--                                        (#{pointChecker.yMin}, #{pointChecker.yMax})"-->
+<!--                                     converterMessage="Y value should be a number">-->
+
+<!--                            <f:validateDoubleRange minimum = "#{pointChecker.yMin}" maximum = "#{pointChecker.yMax}"/>-->
+<!--                        </h:inputText>-->
+<!--                    </label>-->
+<!--                    <h:message id="vm2" styleClass="incorrectInputText" for="yField"/>-->
+<!--                </div>-->
+
+<!--                <div class="rSelectionPanel">-->
+<!--                    Select<a class="colourfulText"> R </a>value-->
+
+<!--                    <h:selectOneRadio id="rButtons" styleClass="rButtons" value = "#{pointChecker.r}" required="true"-->
+<!--                                      requiredMessage="You should select one R value">-->
+
+<!--                        <f:selectItem itemValue = "1" itemLabel = "1" />-->
+<!--                        <f:selectItem itemValue = "2" itemLabel = "2" />-->
+<!--                        <f:selectItem itemValue = "3" itemLabel = "3" />-->
+<!--                        <f:selectItem itemValue = "4" itemLabel = "4" />-->
+<!--                        <f:selectItem itemValue = "5" itemLabel = "5" />-->
+
+<!--                    </h:selectOneRadio>-->
+
+<!--                    <h:message id="vm3" styleClass="incorrectInputText" for="rButtons"/>-->
+<!--                </div>-->
+<!--                <div class="submitButtonsBlock">-->
+<!--                    <h:commandButton-->
+<!--                            value="Check point"-->
+<!--                            id="checkRequestButton"-->
+<!--                            action="#{pointChecker.processRequest}">-->
+
+<!--                        <f:ajax execute="mainForm" render="vm1 vm2 vm3"/>-->
+
+<!--                    </h:commandButton>-->
+<!--                    <br/>-->
+<!--                    <h:commandButton type="button" id="resetRequestButton" value="Reset values"/>-->
+<!--                </div>-->
+
+<!--                <label><input type="Reset" style="display: none" id="resetFormJSF"/></label>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--        <div id="secondaryPanel">-->
+<!--            <div id="svgDiv">-->
+<!--                <svg id="coordinatePlane" viewBox="0 0 500 500">-->
+<!--                    <g id="planeDots" style="visibility: hidden">-->
+<!--                        <c:forEach items="${pointChecker.requests}" var="point">-->
+<!--                            <c:choose>-->
+<!--                                <c:when test="${point.result}">-->
+<!--                                    <circle-->
+<!--                                            cx="${point.x * (220/point.r) + 250}"-->
+<!--                                            cy="${-(point.y * (220/point.r) - 250)}"-->
+<!--                                            r="5" fill="#0077ed"-->
+<!--                                            data-original-x="${point.x * (220/point.r) + 250}"-->
+<!--                                            data-original-y="${-(point.y * (220/point.r) - 250)}"-->
+<!--                                            data-radius="${point.r}"/>-->
+<!--                                </c:when>-->
+<!--                                <c:otherwise>-->
+<!--                                    <circle-->
+<!--                                            cx="${point.x * (220/point.r) + 250}"-->
+<!--                                            cy="${-(point.y * (220/point.r) - 250)}"-->
+<!--                                            r="5" fill="red"-->
+<!--                                            data-original-x="${point.x * (220/point.r) + 250}"-->
+<!--                                            data-original-y="${-(point.y * (220/point.r) - 250)}"-->
+<!--                                            data-radius="${point.r}"/>-->
+<!--                                </c:otherwise>-->
+<!--                            </c:choose>-->
+<!--                        </c:forEach>-->
+<!--                    </g>-->
+
+<!--                    &lt;!&ndash; x axis &ndash;&gt;-->
+<!--                    <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    &lt;!&ndash; y axis &ndash;&gt;-->
+<!--                    <line x1="250" y1="0" x2="250" y2="500" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+
+<!--                    &lt;!&ndash; x axis markup&ndash;&gt;-->
+<!--                    <line x1="30" y1="245" x2="30" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="140" y1="245" x2="140" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="360" y1="245" x2="360" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="470" y1="245" x2="470" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+
+<!--                    &lt;!&ndash; y axis markup&ndash;&gt;-->
+<!--                    <line x1="245" y1="30" x2="255" y2="30" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="245" y1="140" x2="255" y2="140" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="245" y1="360" x2="255" y2="360" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+<!--                    <line x1="245" y1="470" x2="255" y2="470" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
+
+<!--                    &lt;!&ndash; axes naming &ndash;&gt;-->
+<!--                    <text x="485" y="264">x</text>-->
+<!--                    <text x="236" y="15">y</text>-->
+<!--                    <text x="254" y="264">0</text>-->
+
+<!--                    &lt;!&ndash; x markups naming &ndash;&gt;-->
+<!--                    <text style="visibility: hidden" class="markup mR" x="20" y="235">-R</text>-->
+<!--                    <text style="visibility: hidden" class="markup mR2" x="125" y="235">-R/2</text>-->
+<!--                    <text style="visibility: hidden" class="markup R2" x="353" y="235">R/2</text>-->
+<!--                    <text style="visibility: hidden" class="markup R" x="465" y="235">R</text>-->
+
+<!--                    &lt;!&ndash; y markups naming &ndash;&gt;-->
+<!--                    <text style="visibility: hidden" class="markup mR" x="260" y="473">-R</text>-->
+<!--                    <text style="visibility: hidden" class="markup mR2" x="260" y="363">-R/2</text>-->
+<!--                    <text style="visibility: hidden" class="markup R2" x="260" y="145">R/2</text>-->
+<!--                    <text style="visibility: hidden" class="markup R" x="260" y="35">R</text>-->
+
+<!--                    &lt;!&ndash; Figures &ndash;&gt;-->
+<!--                    <polygon points="250 30, 250 250, 360 250" fill="#acacac" opacity="0.2"/>-->
+<!--                    <rect x="140" y="30" width="110" height="220" fill="#acacac" opacity="0.2"/>-->
+<!--                    <path d="M 250 250-->
+<!--                     L 140 250-->
+<!--                     A 110 110 0 0 0 250 360-->
+<!--                     L 250 250"-->
+<!--                          fill="#acacac" opacity="0.2"/>-->
+
+<!--                    <rect id="clickArea" width="100%" height="100%">-->
+<!--                    </rect>-->
+<!--                </svg>-->
+<!--            </div>-->
+
+<!--            <div class="tableBlock">-->
+<!--                <label>Recent results</label>-->
+<!--                <h:dataTable value="#{pointChecker.requests}" var="req">-->
+<!--                    <h:column pt:style="width: 7%">-->
+<!--                        <f:facet name = "header">X</f:facet>-->
+<!--                        ${req.x}-->
+<!--                    </h:column>-->
+
+<!--                    <h:column pt:style="width: 7%">-->
+<!--                        <f:facet name = "header">Y</f:facet>-->
+<!--                        ${req.y}-->
+<!--                    </h:column>-->
+
+<!--                    <h:column pt:style="width: 7%">-->
+<!--                        <f:facet name = "header">R</f:facet>-->
+<!--                        ${req.r}-->
+<!--                    </h:column>-->
+
+<!--                    <h:column pt:style="width: 9%">-->
+<!--                        <f:facet name = "header">Result</f:facet>-->
+
+<!--                        <h:panelGroup rendered="#{req.result}">-->
+<!--                            <span style="color: #72be00">YES</span>-->
+<!--                        </h:panelGroup>-->
+<!--                        <h:panelGroup rendered="#{!req.result}">-->
+<!--                            <span style="color: red">NO</span>-->
+<!--                        </h:panelGroup>-->
+<!--                    </h:column>-->
+
+<!--                    <h:column pt:style="width: 30%">-->
+<!--                        <f:facet name = "header">Request</f:facet>-->
+<!--                        ${req.requestTime}-->
+<!--                    </h:column>-->
+
+<!--                    <h:column pt:style="width: 30%">-->
+<!--                        <f:facet name = "header">Execution time</f:facet>-->
+<!--                        ${req.executionTime} ms-->
+<!--                    </h:column>-->
+<!--                </h:dataTable>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
+        <main-footer gitHubRef="https://github.com/tekassh1">
+
+        </main-footer>
+    </div>
+</body>
+</html>

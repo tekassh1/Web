@@ -1,0 +1,77 @@
+p {
+    margin-bottom: 0;
+}
+
+.collapsedHeader {
+    /*font-family: Montserrat,sans-serif;*/
+    grid-area: header;
+    z-index: 1;
+
+    min-height: 52px;
+    text-align: center;
+    background-color: #000;
+}
+
+.logo {
+    /*font-family: 'Montserrat', sans-serif;*/
+    z-index: 1;
+    float: left;
+    margin-left: 10px;
+
+    min-height: 47px;
+    min-width: 47px;
+
+    max-height: 40px;
+    max-width: 40px;
+
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    z-index: 0;
+    width: 100%;
+    position: absolute;
+    font-size: 100%;
+    color: white;
+    padding-top: 15px;
+}
+
+#expandButton {
+    position: relative;
+    margin-top: 15px;
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin-right: 13px;
+    border: 0;
+    opacity: 40%;
+    transition: .3s;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+#expandButton:hover {
+    opacity: 60%;
+}
+
+.infoText {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    text-align: center;
+    background-color: #404040;
+    color: white;
+
+    /* for expanding animation */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.colourfulText {
+    color: lightgrey;
+}
