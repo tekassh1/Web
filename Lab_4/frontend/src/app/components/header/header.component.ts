@@ -55,11 +55,11 @@ export class MainHeader {
     expandedHeight: number = 0;
     expandedMaxHeight: number = 130;
 
-    constructor(elem: ElementRef) {
-        this.studentName = elem.nativeElement.getAttribute('studentName');
-        this.groupNumber = elem.nativeElement.getAttribute('groupNumber');
-        this.variantNumber = elem.nativeElement.getAttribute('variantNumber');
-    }
+    // constructor(elem: ElementRef) {
+    //     this.studentName = elem.nativeElement.getAttribute('studentName');
+    //     this.groupNumber = elem.nativeElement.getAttribute('groupNumber');
+    //     this.variantNumber = elem.nativeElement.getAttribute('variantNumber');
+    // }
 
     public expand() {
         if (this.expandedHeight == this.expandedMaxHeight) {

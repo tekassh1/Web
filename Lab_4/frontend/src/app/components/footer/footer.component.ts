@@ -1,4 +1,4 @@
-import {Component, ElementRef} from "@angular/core";
+import {Component, ElementRef, Input} from "@angular/core";
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -6,7 +6,7 @@ import {NgOptimizedImage} from "@angular/common";
     standalone: true,
     template: `
         <footer style="position: relative">
-            &#169; Goovnocode inc. 2023
+            {{developers}}
             <br/>
             <a href="{{gitHubRef}}" target="_blank">
                 <img ngSrc="../../../assets/footer/github.svg" class="github" alt="githubLogo" width="25" height="25">
@@ -20,9 +20,6 @@ import {NgOptimizedImage} from "@angular/common";
 })
 
 export class MainFooter {
-    gitHubRef: string;
-
-    constructor(elem: ElementRef) {
-        this.gitHubRef = elem.nativeElement.getAttribute("gitHubRef");
-    }
+    @Input() gitHubRef: string;
+    @Input() developers: string;
 }

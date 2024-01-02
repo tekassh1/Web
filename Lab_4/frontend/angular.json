@@ -14,10 +14,8 @@
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.json",
-            "assets": ["src/assets"],
-            "styles": [
-              "src/assets/common/styles/mainPageStyle.css"
-            ],
+            "assets": ["src/assets", "src/assets/favicon.svg"],
+            "styles": ["src/assets/common/styles/index.css"],
             "aot": true
           },
           "configurations": {
