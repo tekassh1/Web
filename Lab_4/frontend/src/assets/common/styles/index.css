@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html {
+    background-color: #404040;
+}
+
 input, textarea, select {
     -webkit-appearance: none;
     -moz-appearance: none;

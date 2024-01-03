@@ -1,5 +1,5 @@
 .selectionBlock {
-    padding-bottom: 40px;
+    padding-bottom: 60px;
 }
 
 .colorfulText {
@@ -14,7 +14,7 @@ input {
     margin-top: 20px;
     padding-left: 1%;
     background-color: #f3f3f3;
-    border-style: none;
+    border: 1px solid transparent;
     cursor: text;
     width: 30%;
     height: 28px;
@@ -29,6 +29,15 @@ input:focus {
 
 ::placeholder {
     text-align: center;
+}
+
+.wrongInputMsg {
+    left: 0;
+    right: 0;
+    position: absolute;
+    padding-top: 10px;
+    color: red;
+    font-size: 15px;
 }
 
 #submitBlock {
