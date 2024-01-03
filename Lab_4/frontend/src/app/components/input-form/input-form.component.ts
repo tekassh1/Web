@@ -16,7 +16,7 @@ interface vObj {
             <div class="selectionBlock">
                 Enter<a class="colorfulText"> X </a>value<br/>
 
-                <input name="xCoord" formControlName="xCoord"/>
+                <input name="xCoord" formControlName="xCoord" maxlength="10"/>
 
                 <div *ngIf="coordsForm.controls['xCoord'].hasError('rangeErr') && coordsForm.controls['xCoord'].touched"
                      class="wrongInputMsg">
@@ -30,7 +30,7 @@ interface vObj {
             <div class="selectionBlock">
                 Enter<a class="colorfulText"> Y </a>value<br/>
 
-                <input name="yCoord" formControlName="yCoord"/>
+                <input name="yCoord" formControlName="yCoord" maxlength="10"/>
 
                 <div *ngIf="coordsForm.controls['yCoord'].hasError('rangeErr') && coordsForm.controls['yCoord'].touched"
                      class="wrongInputMsg">
@@ -44,7 +44,7 @@ interface vObj {
             <div class="selectionBlock">
                 Enter<a class="colorfulText"> R </a>value<br/>
 
-                <input name="rValue" formControlName="rValue"/>
+                <input name="rValue" formControlName="rValue" maxlength="10"/>
                 <div *ngIf="coordsForm.controls['rValue'].hasError('rangeErr') && coordsForm.controls['rValue'].touched"
                      class="wrongInputMsg">
                     Wrong 'r' value! Available range ({{rMin}} ; {{rMax}})

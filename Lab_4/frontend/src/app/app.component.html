@@ -24,85 +24,57 @@
         </div>
 
         <div id="secondaryPanel">
+            <div id="svgDiv">
+                <svg id="coordinatePlane" viewBox="0 0 500 500">
+                    <!-- x axis -->
+                    <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <!-- y axis -->
+                    <line x1="250" y1="0" x2="250" y2="500" stroke="black" stroke-width="1" stroke-linecap="square"/>
 
+                    <!-- x axis markup-->
+                    <line x1="30" y1="245" x2="30" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="140" y1="245" x2="140" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="360" y1="245" x2="360" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="470" y1="245" x2="470" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+
+                    <!-- y axis markup-->
+                    <line x1="245" y1="30" x2="255" y2="30" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="245" y1="140" x2="255" y2="140" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="245" y1="360" x2="255" y2="360" stroke="black" stroke-width="1" stroke-linecap="square"/>
+                    <line x1="245" y1="470" x2="255" y2="470" stroke="black" stroke-width="1" stroke-linecap="square"/>
+
+                    <!-- axes naming -->
+                    <text x="485" y="264">x</text>
+                    <text x="236" y="15">y</text>
+                    <text x="254" y="264">0</text>
+
+                    <!-- x markups naming -->
+                    <text style="visibility: hidden" class="markup mR" x="20" y="235">-R</text>
+                    <text style="visibility: hidden" class="markup mR2" x="125" y="235">-R/2</text>
+                    <text style="visibility: hidden" class="markup R2" x="353" y="235">R/2</text>
+                    <text style="visibility: hidden" class="markup R" x="465" y="235">R</text>
+
+                    <!-- y markups naming -->
+                    <text style="visibility: hidden" class="markup mR" x="260" y="473">-R</text>
+                    <text style="visibility: hidden" class="markup mR2" x="260" y="363">-R/2</text>
+                    <text style="visibility: hidden" class="markup R2" x="260" y="145">R/2</text>
+                    <text style="visibility: hidden" class="markup R" x="260" y="35">R</text>
+
+                    <!-- Figures -->
+                    <polygon points="250 30, 250 250, 360 250" fill="#acacac" opacity="0.2"/>
+                    <rect x="140" y="30" width="110" height="220" fill="#acacac" opacity="0.2"/>
+                    <path d="M 250 250
+                         L 140 250
+                         A 110 110 0 0 0 250 360
+                         L 250 250"
+                          fill="#acacac" opacity="0.2"/>
+
+                    <rect id="clickArea" width="100%" height="100%">
+                    </rect>
+                </svg>
+            </div>
         </div>
     </div>
-
-    <!--        <div id="secondaryPanel">-->
-    <!--            <div id="svgDiv">-->
-    <!--                <svg id="coordinatePlane" viewBox="0 0 500 500">-->
-    <!--                    <g id="planeDots" style="visibility: hidden">-->
-    <!--                        <c:forEach items="${pointChecker.requests}" var="point">-->
-    <!--                            <c:choose>-->
-    <!--                                <c:when test="${point.result}">-->
-    <!--                                    <circle-->
-    <!--                                            cx="${point.x * (220/point.r) + 250}"-->
-    <!--                                            cy="${-(point.y * (220/point.r) - 250)}"-->
-    <!--                                            r="5" fill="#0077ed"-->
-    <!--                                            data-original-x="${point.x * (220/point.r) + 250}"-->
-    <!--                                            data-original-y="${-(point.y * (220/point.r) - 250)}"-->
-    <!--                                            data-radius="${point.r}"/>-->
-    <!--                                </c:when>-->
-    <!--                                <c:otherwise>-->
-    <!--                                    <circle-->
-    <!--                                            cx="${point.x * (220/point.r) + 250}"-->
-    <!--                                            cy="${-(point.y * (220/point.r) - 250)}"-->
-    <!--                                            r="5" fill="red"-->
-    <!--                                            data-original-x="${point.x * (220/point.r) + 250}"-->
-    <!--                                            data-original-y="${-(point.y * (220/point.r) - 250)}"-->
-    <!--                                            data-radius="${point.r}"/>-->
-    <!--                                </c:otherwise>-->
-    <!--                            </c:choose>-->
-    <!--                        </c:forEach>-->
-    <!--                    </g>-->
-
-    <!--                    &lt;!&ndash; x axis &ndash;&gt;-->
-    <!--                    <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    &lt;!&ndash; y axis &ndash;&gt;-->
-    <!--                    <line x1="250" y1="0" x2="250" y2="500" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-
-    <!--                    &lt;!&ndash; x axis markup&ndash;&gt;-->
-    <!--                    <line x1="30" y1="245" x2="30" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="140" y1="245" x2="140" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="360" y1="245" x2="360" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="470" y1="245" x2="470" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-
-    <!--                    &lt;!&ndash; y axis markup&ndash;&gt;-->
-    <!--                    <line x1="245" y1="30" x2="255" y2="30" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="245" y1="140" x2="255" y2="140" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="245" y1="360" x2="255" y2="360" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-    <!--                    <line x1="245" y1="470" x2="255" y2="470" stroke="black" stroke-width="1" stroke-linecap="square"/>-->
-
-    <!--                    &lt;!&ndash; axes naming &ndash;&gt;-->
-    <!--                    <text x="485" y="264">x</text>-->
-    <!--                    <text x="236" y="15">y</text>-->
-    <!--                    <text x="254" y="264">0</text>-->
-
-    <!--                    &lt;!&ndash; x markups naming &ndash;&gt;-->
-    <!--                    <text style="visibility: hidden" class="markup mR" x="20" y="235">-R</text>-->
-    <!--                    <text style="visibility: hidden" class="markup mR2" x="125" y="235">-R/2</text>-->
-    <!--                    <text style="visibility: hidden" class="markup R2" x="353" y="235">R/2</text>-->
-    <!--                    <text style="visibility: hidden" class="markup R" x="465" y="235">R</text>-->
-
-    <!--                    &lt;!&ndash; y markups naming &ndash;&gt;-->
-    <!--                    <text style="visibility: hidden" class="markup mR" x="260" y="473">-R</text>-->
-    <!--                    <text style="visibility: hidden" class="markup mR2" x="260" y="363">-R/2</text>-->
-    <!--                    <text style="visibility: hidden" class="markup R2" x="260" y="145">R/2</text>-->
-    <!--                    <text style="visibility: hidden" class="markup R" x="260" y="35">R</text>-->
-
-    <!--                    &lt;!&ndash; Figures &ndash;&gt;-->
-    <!--                    <polygon points="250 30, 250 250, 360 250" fill="#acacac" opacity="0.2"/>-->
-    <!--                    <rect x="140" y="30" width="110" height="220" fill="#acacac" opacity="0.2"/>-->
-    <!--                    <path d="M 250 250-->
-    <!--                     L 140 250-->
-    <!--                     A 110 110 0 0 0 250 360-->
-    <!--                     L 250 250"-->
-    <!--                          fill="#acacac" opacity="0.2"/>-->
-
-    <!--                    <rect id="clickArea" width="100%" height="100%">-->
-    <!--                    </rect>-->
-    <!--                </svg>-->
-    <!--            </div>-->
 
     <!--            <div class="tableBlock">-->
     <!--                <label>Recent results</label>-->

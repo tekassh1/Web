@@ -39,10 +39,26 @@ body {
 }
 
 #secondaryPanel {
+    width: 30%;
     display: flex;
     box-sizing: border-box;
     border-radius: 15px;
     grid-area: secondary;
     margin: 20px;
     flex-direction: column;
+}
+
+#svgDiv {
+    float: left;
+    display: block;
+    box-sizing: border-box;
+
+    box-shadow: 0 0 15px 0 #e3e3e3;
+    border-radius: 15px;
+    background-color: white;
+}
+
+#clickArea {
+    cursor: pointer;
+    opacity: 0;
 }
