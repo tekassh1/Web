@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {MainHeader} from "./components/header/header.component";
 import {MainFooter} from "./components/footer/footer.component";
 import {MainForm} from "./components/input-form/input-form.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
     selector: "app-root",
@@ -10,7 +11,8 @@ import {MainForm} from "./components/input-form/input-form.component";
     imports: [
         MainHeader,
         MainFooter,
-        MainForm
+        MainForm,
+        NgForOf
     ],
     styleUrls: ['./app.component.css']
 })
