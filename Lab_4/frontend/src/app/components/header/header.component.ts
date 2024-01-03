@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, Input, ViewChild} from "@angular/core";
 import {NgOptimizedImage, NgStyle} from "@angular/common";
 
 @Component({
@@ -33,7 +33,7 @@ import {NgOptimizedImage, NgStyle} from "@angular/common";
     styleUrls: ['./header.component.css']
 })
 
-export class MainHeader {
+export class HeaderComponent {
 
     username: string = "";
 

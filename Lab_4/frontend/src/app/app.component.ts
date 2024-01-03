@@ -1,18 +1,23 @@
 import {Component} from "@angular/core";
-import {MainHeader} from "./components/header/header.component";
-import {MainFooter} from "./components/footer/footer.component";
-import {MainForm} from "./components/input-form/input-form.component";
+import {HeaderComponent} from "./components/header/header.component";
+import {FooterComponent} from "./components/footer/footer.component";
+import {CoordinatesFormComponent} from "./components/input-form/input-form.component";
+import {CoordinatePlaneComponent} from "./components/coordinate-plane/coordinate-plane.component";
+
 import {NgForOf} from "@angular/common";
+import {ResultTableComponent} from "./components/result-table/result-table.component";
 
 @Component({
     selector: "app-root",
     standalone: true,
     templateUrl: './app.component.html',
     imports: [
-        MainHeader,
-        MainFooter,
-        MainForm,
-        NgForOf
+        HeaderComponent,
+        FooterComponent,
+        CoordinatesFormComponent,
+        CoordinatePlaneComponent,
+        NgForOf,
+        ResultTableComponent
     ],
     styleUrls: ['./app.component.css']
 })

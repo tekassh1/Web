@@ -1,0 +1,49 @@
+<div id="svgDiv">
+    <svg id="coordinatePlane" viewBox="0 0 500 500">
+        <!-- x axis -->
+        <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <!-- y axis -->
+        <line x1="250" y1="0" x2="250" y2="500" stroke="black" stroke-width="1" stroke-linecap="square"/>
+
+        <!-- x axis markup-->
+        <line x1="30" y1="245" x2="30" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="140" y1="245" x2="140" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="360" y1="245" x2="360" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="470" y1="245" x2="470" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
+
+        <!-- y axis markup-->
+        <line x1="245" y1="30" x2="255" y2="30" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="245" y1="140" x2="255" y2="140" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="245" y1="360" x2="255" y2="360" stroke="black" stroke-width="1" stroke-linecap="square"/>
+        <line x1="245" y1="470" x2="255" y2="470" stroke="black" stroke-width="1" stroke-linecap="square"/>
+
+        <!-- axes naming -->
+        <text x="485" y="264">x</text>
+        <text x="236" y="15">y</text>
+        <text x="254" y="264">0</text>
+
+        <!-- x markups naming -->
+        <text class="markup mR" x="20" y="235">-R</text>
+        <text class="markup mR2" x="125" y="235">-R/2</text>
+        <text class="markup R2" x="353" y="235">R/2</text>
+        <text class="markup R" x="465" y="235">R</text>
+
+        <!-- y markups naming -->
+        <text class="markup mR" x="260" y="473">-R</text>
+        <text class="markup mR2" x="260" y="363">-R/2</text>
+        <text class="markup R2" x="260" y="145">R/2</text>
+        <text class="markup R" x="260" y="35">R</text>
+
+        <!-- Figures -->
+        <polygon points="250 30, 250 250, 360 250" fill="#acacac" opacity="0.2"/>
+        <rect x="140" y="30" width="110" height="220" fill="#acacac" opacity="0.2"/>
+        <path d="M 250 250
+                         L 140 250
+                         A 110 110 0 0 0 250 360
+                         L 250 250"
+              fill="#acacac" opacity="0.2"/>
+
+        <rect id="clickArea" width="100%" height="100%">
+        </rect>
+    </svg>
+</div>

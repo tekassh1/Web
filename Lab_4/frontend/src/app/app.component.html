@@ -20,136 +20,18 @@
 
     <div id="panelsWrapper">
         <div id="controlPanel">
-            <main-form></main-form>
+            <main-form>
+            </main-form>
         </div>
 
         <div id="secondaryPanel">
-            <div id="svgDiv">
-                <svg id="coordinatePlane" viewBox="0 0 500 500">
-                    <!-- x axis -->
-                    <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <!-- y axis -->
-                    <line x1="250" y1="0" x2="250" y2="500" stroke="black" stroke-width="1" stroke-linecap="square"/>
+            <coordinate-plane>
+            </coordinate-plane>
 
-                    <!-- x axis markup-->
-                    <line x1="30" y1="245" x2="30" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="140" y1="245" x2="140" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="360" y1="245" x2="360" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="470" y1="245" x2="470" y2="255" stroke="black" stroke-width="1" stroke-linecap="square"/>
-
-                    <!-- y axis markup-->
-                    <line x1="245" y1="30" x2="255" y2="30" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="245" y1="140" x2="255" y2="140" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="245" y1="360" x2="255" y2="360" stroke="black" stroke-width="1" stroke-linecap="square"/>
-                    <line x1="245" y1="470" x2="255" y2="470" stroke="black" stroke-width="1" stroke-linecap="square"/>
-
-                    <!-- axes naming -->
-                    <text x="485" y="264">x</text>
-                    <text x="236" y="15">y</text>
-                    <text x="254" y="264">0</text>
-
-                    <!-- x markups naming -->
-                    <text class="markup mR" x="20" y="235">-R</text>
-                    <text class="markup mR2" x="125" y="235">-R/2</text>
-                    <text class="markup R2" x="353" y="235">R/2</text>
-                    <text class="markup R" x="465" y="235">R</text>
-
-                    <!-- y markups naming -->
-                    <text class="markup mR" x="260" y="473">-R</text>
-                    <text class="markup mR2" x="260" y="363">-R/2</text>
-                    <text class="markup R2" x="260" y="145">R/2</text>
-                    <text class="markup R" x="260" y="35">R</text>
-
-                    <!-- Figures -->
-                    <polygon points="250 30, 250 250, 360 250" fill="#acacac" opacity="0.2"/>
-                    <rect x="140" y="30" width="110" height="220" fill="#acacac" opacity="0.2"/>
-                    <path d="M 250 250
-                         L 140 250
-                         A 110 110 0 0 0 250 360
-                         L 250 250"
-                          fill="#acacac" opacity="0.2"/>
-
-                    <rect id="clickArea" width="100%" height="100%">
-                    </rect>
-                </svg>
-            </div>
-
-            <div id="tableBlock">
-                <label>Recent results</label>
-                <table>
-                    <thead>
-                        <tr id="headerTr">
-                            <th style="width: 7%;">X</th>
-                            <th style="width: 7%">Y</th>
-                            <th style="width: 7%">R</th>
-                            <th style="width: 9%">Result</th>
-                            <th style="width: 30%">Request</th>
-                            <th style="width: 30%">Execution time</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mainTableBody">
-                    <ng-container *ngFor="let _ of [].constructor(10)">
-                        <tr>
-                            <td style="width: 7%;">1</td>
-                            <td style="width: 7%;">2</td>
-                            <td style="width: 7%;">3</td>
-
-                            <td style="width: 9%;">YES</td>
-
-
-                            <td style="width: 30%;">03.01.24</td>
-                            <td style="width: 30%;">3 ms</td>
-                        </tr>
-                    </ng-container>
-
-                    </tbody>
-                </table>
-            </div>
+            <result-table>
+            </result-table>
         </div>
     </div>
-
-<!--                <div class="tableBlock">-->
-    <!--                <label>Recent results</label>-->
-    <!--                <h:dataTable value="#{pointChecker.requests}" var="req">-->
-    <!--                    <h:column pt:style="width: 7%">-->
-    <!--                        <f:facet name = "header">X</f:facet>-->
-    <!--                        ${req.x}-->
-    <!--                    </h:column>-->
-
-    <!--                    <h:column pt:style="width: 7%">-->
-    <!--                        <f:facet name = "header">Y</f:facet>-->
-    <!--                        ${req.y}-->
-    <!--                    </h:column>-->
-
-    <!--                    <h:column pt:style="width: 7%">-->
-    <!--                        <f:facet name = "header">R</f:facet>-->
-    <!--                        ${req.r}-->
-    <!--                    </h:column>-->
-
-    <!--                    <h:column pt:style="width: 9%">-->
-    <!--                        <f:facet name = "header">Result</f:facet>-->
-
-    <!--                        <h:panelGroup rendered="#{req.result}">-->
-    <!--                            <span style="color: #72be00">YES</span>-->
-    <!--                        </h:panelGroup>-->
-    <!--                        <h:panelGroup rendered="#{!req.result}">-->
-    <!--                            <span style="color: red">NO</span>-->
-    <!--                        </h:panelGroup>-->
-    <!--                    </h:column>-->
-
-    <!--                    <h:column pt:style="width: 30%">-->
-    <!--                        <f:facet name = "header">Request</f:facet>-->
-    <!--                        ${req.requestTime}-->
-    <!--                    </h:column>-->
-
-    <!--                    <h:column pt:style="width: 30%">-->
-    <!--                        <f:facet name = "header">Execution time</f:facet>-->
-    <!--                        ${req.executionTime} ms-->
-    <!--                    </h:column>-->
-    <!--                </h:dataTable>-->
-
-    <!--            </div>-->
-    <!--        </div>-->
 
     <main-footer
             [developers]="'&#169; Goovnocode inc. 2023'"

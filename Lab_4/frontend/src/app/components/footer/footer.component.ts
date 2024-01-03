@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -19,7 +19,7 @@ import {NgOptimizedImage} from "@angular/common";
     styleUrls: ['./footer.component.css']
 })
 
-export class MainFooter {
+export class FooterComponent {
     @Input() gitHubRef: string;
     @Input() developers: string;
 }

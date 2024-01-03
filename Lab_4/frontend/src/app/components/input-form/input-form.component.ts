@@ -62,7 +62,7 @@ interface vObj {
     `
 })
 
-export class MainForm {
+export class CoordinatesFormComponent {
     coordsForm: FormGroup;
 
     constructor() {
