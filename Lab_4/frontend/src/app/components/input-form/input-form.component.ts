@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 
@@ -16,6 +16,9 @@ interface vObj {
 
 export class CoordinatesFormComponent implements OnInit{
     coordsForm: FormGroup;
+
+    @ViewChild("submitBtn", {static: false})
+    submitBtn: ElementRef;
 
     ngOnInit(): void {
         this.coordsForm = new FormGroup({
@@ -37,7 +40,6 @@ export class CoordinatesFormComponent implements OnInit{
         } else {
             this.coordsForm.markAllAsTouched();
         }
-        console.log("Submit called!");
     }
 
     reset() {
@@ -54,10 +56,13 @@ export class CoordinatesFormComponent implements OnInit{
     rMin: number = -3;
     rMax: number = 5;
 
-    // isRSelected(): boolean {
-    //     return !(this.coordsForm.controls['rValue'].hasError('rangeErr') ||
-    //         this.coordsForm.controls['rValue'].hasError('NaN'));
-    // }
+    rSelected(): number | null {
+        if (this.coordsForm.controls['rValue'].hasError('rangeErr') ||
+            this.coordsForm.controls['rValue'].hasError('NaN'))
+            return null;
+        else
+            return this.coordsForm.get('rValue').value;
+    }
 
     xCoordValidator(control: FormControl): { [s: string]: boolean } | null {
         let validationMap: vObj = {};
