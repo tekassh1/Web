@@ -2,7 +2,7 @@
     <div class="selectionBlock">
         Enter<a class="colorfulText"> X </a>value<br/>
 
-        <input name="xCoord" formControlName="xCoord" maxlength="10" (click)="submittedTrigger = false;"/>
+        <input name="xCoord" formControlName="xCoord" maxlength="3" (click)="submittedTrigger = false;"/>
 
         <div *ngIf="coordsForm.controls['xCoord'].hasError('empty') && submittedTrigger"
              class="wrongInputMsg">
@@ -20,7 +20,7 @@
     <div class="selectionBlock">
         Enter<a class="colorfulText"> Y </a>value<br/>
 
-        <input name="yCoord" formControlName="yCoord" maxlength="10" (click)="submittedTrigger = false;"/>
+        <input name="yCoord" formControlName="yCoord" maxlength="3" (click)="submittedTrigger = false;"/>
 
         <div *ngIf="coordsForm.controls['yCoord'].hasError('empty') && submittedTrigger"
              class="wrongInputMsg">
@@ -38,7 +38,7 @@
     <div class="selectionBlock">
         Enter<a class="colorfulText"> R </a>value<br/>
 
-        <input name="rValue" formControlName="rValue" maxlength="10" (click)="submittedTrigger = false;"/>
+        <input name="rValue" formControlName="rValue" maxlength="3" (click)="submittedTrigger = false;"/>
 
         <div *ngIf="coordsForm.controls['rValue'].hasError('empty') && submittedTrigger"
              class="wrongInputMsg">
@@ -51,6 +51,10 @@
         <div *ngIf="coordsForm.controls['rValue'].hasError('NaN') && coordsForm.controls['rValue'].touched"
              class="wrongInputMsg">
             Wrong 'r' value! Value should be a numeric!
+        </div>
+        <div *ngIf="coordsForm.controls['rValue'].hasError('negative') && coordsForm.controls['rValue'].touched"
+             class="wrongInputMsg">
+            Radius should have greater than zero value!
         </div>
     </div>
     <div id="submitBlock">

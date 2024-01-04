@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {NgForOf} from "@angular/common";
+import {CoordinatesFormComponent} from "../input-form/input-form.component";
 
 @Component({
     selector: "result-table",
@@ -19,17 +20,17 @@ import {NgForOf} from "@angular/common";
                 </tr>
                 </thead>
                 <tbody id="mainTableBody">
-                <ng-container *ngFor="let _ of [].constructor(10)">
+                <ng-container *ngFor="let req of coordinatesFormComponent.requests">
                     <tr>
-                        <td style="width: 7%;">1</td>
-                        <td style="width: 7%;">2</td>
-                        <td style="width: 7%;">3</td>
+                        <td style="width: 7%;">{{req.x}}</td>
+                        <td style="width: 7%;">{{req.y}}</td>
+                        <td style="width: 7%;">{{req.r}}</td>
 
-                        <td style="width: 9%;">YES</td>
+                        <td style="width: 9%;">{{req.res}}</td>
 
 
-                        <td style="width: 30%;">03.01.24</td>
-                        <td style="width: 30%;">3 ms</td>
+                        <td style="width: 30%;">{{req.reqDate}}</td>
+                        <td style="width: 30%;">{{req.execTime}} ms</td>
                     </tr>
                 </ng-container>
 
@@ -44,5 +45,6 @@ import {NgForOf} from "@angular/common";
 })
 
 export class ResultTableComponent {
-
+    @Input()
+    coordinatesFormComponent: CoordinatesFormComponent;
 }

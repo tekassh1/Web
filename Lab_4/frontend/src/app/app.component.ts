@@ -25,4 +25,7 @@ import {ResultTableComponent} from "./components/result-table/result-table.compo
 export class AppComponent {
     @ViewChild('formComponent', {static: false})
     formComponent: CoordinatesFormComponent;
+
+    @ViewChild('coordinatePlaneComponent', {static: false})
+    coordinatePlaneComponent: CoordinatePlaneComponent;
 }
