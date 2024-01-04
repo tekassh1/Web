@@ -55,13 +55,7 @@ export class HeaderComponent {
     expandedHeight: number = 0;
     expandedMaxHeight: number = 130;
 
-    // constructor(elem: ElementRef) {
-    //     this.studentName = elem.nativeElement.getAttribute('studentName');
-    //     this.groupNumber = elem.nativeElement.getAttribute('groupNumber');
-    //     this.variantNumber = elem.nativeElement.getAttribute('variantNumber');
-    // }
-
-    public expand() {
+    expand() {
         if (this.expandedHeight == this.expandedMaxHeight) {
             this.expandedHeight = 0;
             this.arrowUrl = this.arrowDownUrl;

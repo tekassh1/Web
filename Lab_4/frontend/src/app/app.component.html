@@ -20,12 +20,12 @@
 
     <div id="panelsWrapper">
         <div id="controlPanel">
-            <main-form>
+            <main-form #formComponent>
             </main-form>
         </div>
 
         <div id="secondaryPanel">
-            <coordinate-plane>
+            <coordinate-plane [coordinatesForm]="this.formComponent">
             </coordinate-plane>
 
             <result-table>

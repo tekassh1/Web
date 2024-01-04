@@ -1,0 +1,60 @@
+<form [formGroup]="coordsForm" novalidate (ngSubmit)="submit()">
+    <div class="selectionBlock">
+        Enter<a class="colorfulText"> X </a>value<br/>
+
+        <input name="xCoord" formControlName="xCoord" maxlength="10" (click)="submittedTrigger = false;"/>
+
+        <div *ngIf="coordsForm.controls['xCoord'].hasError('empty') && submittedTrigger"
+             class="wrongInputMsg">
+            You should enter 'x' value!
+        </div>
+        <div *ngIf="coordsForm.controls['xCoord'].hasError('rangeErr') && coordsForm.controls['xCoord'].touched"
+             class="wrongInputMsg">
+            Wrong 'x' value! Available range ({{ xMin }} ; {{ xMax }})
+        </div>
+        <div *ngIf="coordsForm.controls['xCoord'].hasError('NaN') && coordsForm.controls['xCoord'].touched"
+             class="wrongInputMsg">
+            Wrong 'x' value! Value should be a numeric!
+        </div>
+    </div>
+    <div class="selectionBlock">
+        Enter<a class="colorfulText"> Y </a>value<br/>
+
+        <input name="yCoord" formControlName="yCoord" maxlength="10" (click)="submittedTrigger = false;"/>
+
+        <div *ngIf="coordsForm.controls['yCoord'].hasError('empty') && submittedTrigger"
+             class="wrongInputMsg">
+            You should enter 'y' value!
+        </div>
+        <div *ngIf="coordsForm.controls['yCoord'].hasError('rangeErr') && coordsForm.controls['yCoord'].touched"
+             class="wrongInputMsg">
+            Wrong 'y' value! Available range ({{ yMin }} ; {{ yMax }})
+        </div>
+        <div *ngIf="coordsForm.controls['yCoord'].hasError('NaN') && coordsForm.controls['yCoord'].touched"
+             class="wrongInputMsg">
+            Wrong 'y' value! Value should be a numeric!
+        </div>
+    </div>
+    <div class="selectionBlock">
+        Enter<a class="colorfulText"> R </a>value<br/>
+
+        <input name="rValue" formControlName="rValue" maxlength="10" (click)="submittedTrigger = false;"/>
+
+        <div *ngIf="coordsForm.controls['rValue'].hasError('empty') && submittedTrigger"
+             class="wrongInputMsg">
+            You should enter 'r' value!
+        </div>
+        <div *ngIf="coordsForm.controls['rValue'].hasError('rangeErr') && coordsForm.controls['rValue'].touched"
+             class="wrongInputMsg">
+            Wrong 'r' value! Available range ({{ rMin }} ; {{ rMax }})
+        </div>
+        <div *ngIf="coordsForm.controls['rValue'].hasError('NaN') && coordsForm.controls['rValue'].touched"
+             class="wrongInputMsg">
+            Wrong 'r' value! Value should be a numeric!
+        </div>
+    </div>
+    <div id="submitBlock">
+        <button type="submit" id="checkRequestBtn">Check</button>
+        <button type="button" id="resetBtn" (click)="reset();">Reset values</button>
+    </div>
+</form>

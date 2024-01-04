@@ -1,5 +1,5 @@
 <div id="svgDiv">
-    <svg id="coordinatePlane" viewBox="0 0 500 500">
+    <svg #coordinatePlane id="coordinatePlane" viewBox="0 0 500 500">
         <!-- x axis -->
         <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>
         <!-- y axis -->
@@ -43,7 +43,7 @@
                          L 250 250"
               fill="#acacac" opacity="0.2"/>
 
-        <rect id="clickArea" width="100%" height="100%">
+        <rect id="clickArea" width="100%" height="100%" (click)="sendRequest($event)">
         </rect>
     </svg>
 </div>
