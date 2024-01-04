@@ -6,7 +6,7 @@ import {NgOptimizedImage} from "@angular/common";
     standalone: true,
     template: `
         <footer style="position: relative">
-            {{developers}}
+            {{ developers }}
             <br/>
             <a href="{{gitHubRef}}" target="_blank">
                 <img ngSrc="../../../assets/footer/github.svg" class="github" alt="githubLogo" width="25" height="25">

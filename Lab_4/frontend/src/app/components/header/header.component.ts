@@ -19,9 +19,9 @@ import {NgOptimizedImage, NgStyle} from "@angular/common";
             <div #expanded class="infoText"
                  [ngStyle]="{'max-height': [expandedHeight] + 'px', 'max-width': 'inherit'}">
 
-                <p style="margin-top: 13px;">Student: <a class="colourfulText">{{studentName}}</a></p>
-                <p>Group: <a class="colourfulText">{{groupNumber}}</a></p>
-                <p style="margin-bottom: 13px;">Variant: <a class="colourfulText">{{variantNumber}}</a></p>
+                <p style="margin-top: 13px;">Student: <a class="colourfulText">{{ studentName }}</a></p>
+                <p>Group: <a class="colourfulText">{{ groupNumber }}</a></p>
+                <p style="margin-bottom: 13px;">Variant: <a class="colourfulText">{{ variantNumber }}</a></p>
             </div>
 
         </header>
@@ -59,8 +59,7 @@ export class HeaderComponent {
         if (this.expandedHeight == this.expandedMaxHeight) {
             this.expandedHeight = 0;
             this.arrowUrl = this.arrowDownUrl;
-        }
-        else {
+        } else {
             this.expandedHeight = this.expandedMaxHeight;
             this.arrowUrl = this.arrowUpUrl;
         }
