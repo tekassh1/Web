@@ -8,7 +8,7 @@ import {NgOptimizedImage, NgStyle} from "@angular/common";
         <header class="header">
             <div class="collapsedHeader">
                 <h2 class="label">LAB 4</h2>
-                <img ngSrc="../../../assets/header/main.svg" class="logo" alt="mainLogo" fill="">
+                <img ngSrc="../../../../assets/header/main.svg" class="logo" alt="mainLogo" fill="">
 
                 <button #expandButton (click)="expand()" type="button" id="expandButton">
                     <img #arrow ngSrc="{{arrowUrl}}"

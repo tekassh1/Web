@@ -19,23 +19,8 @@
     </main-header>
 
     <div id="panelsWrapper">
-        <div id="controlPanel">
-            <main-form
-                #formComponent
-                [coordinatePlaneComponent]="this.coordinatePlaneComponent">
-            </main-form>
-        </div>
-
-        <div id="secondaryPanel">
-            <coordinate-plane
-                #coordinatePlaneComponent
-                [coordinatesFormComponent]="this.formComponent">
-            </coordinate-plane>
-
-            <result-table
-                    [coordinatesFormComponent]="this.formComponent">
-            </result-table>
-        </div>
+<!--        <main-page class="viewComponent"></main-page>-->
+        <auth-page class="viewComponent"></auth-page>
     </div>
 
     <main-footer

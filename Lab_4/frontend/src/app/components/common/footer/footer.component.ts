@@ -9,7 +9,8 @@ import {NgOptimizedImage} from "@angular/common";
             {{ developers }}
             <br/>
             <a href="{{gitHubRef}}" target="_blank">
-                <img ngSrc="../../../assets/footer/github.svg" class="github" alt="githubLogo" width="25" height="25">
+                <img ngSrc="../../../../assets/footer/github.svg" class="github" alt="githubLogo" width="25"
+                     height="25">
             </a>
         </footer>
     `,

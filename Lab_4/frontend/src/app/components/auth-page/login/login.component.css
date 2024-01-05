@@ -1,0 +1,86 @@
+#label {
+    font-size: 18px;
+}
+
+.colorfulText {
+    color: #0077ed;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrongInputMsg {
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin-top: 250px;
+    color: red;
+    font-size: 15px;
+}
+
+input {
+    font-size: 14px;
+    padding-left: 1%;
+    display: block;
+    margin: 20px auto 0;
+    border: 1px solid transparent;
+    cursor: text;
+    width: 15%;
+    height: 33px;
+    border-radius: 5px;
+}
+
+input[type='password'] {
+    font: bold 70% Verdana;
+}
+
+input::placeholder {
+    opacity: 0.6;
+    padding-left: 10px;
+    font: 14px 'Montserrat', sans-serif;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #dadce0;
+    background-color: #eeeeee;
+}
+
+#submitBtn {
+    font-size: 15px;
+    margin-top: 35px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: #0077ed;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 16%;
+    height: 38px;
+}
+
+#submitBtn:hover {
+    background-color: #0061c7;
+}
+
+#registerOfferBlock {
+    padding-top: 15px;
+    font-size: 13px;
+}
+
+#registerOfferBlock button {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #0077ed;
+    background-color: white;
+    border: 0;
+}
+
+#registerOfferBlock button:hover {
+    text-decoration: underline;
+    color: #0061c7;
+}
