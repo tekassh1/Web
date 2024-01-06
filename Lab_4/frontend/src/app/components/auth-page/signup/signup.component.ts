@@ -41,6 +41,10 @@ import {RouterModule} from "@angular/router";
                      class="wrongInputMsg">
                     Passwords are different!
                 </div>
+                <div *ngIf="serverMsg && submitTrigger"
+                     class="wrongInputMsg">
+                    {{serverMsg}}
+                </div>
                 
                 <div id="loginOfferBlock">
                     Have an account?
@@ -55,6 +59,7 @@ export class SignupComponent implements OnInit {
     signupForm: FormGroup;
     submitTrigger: boolean = false;
     logInPageLink: string = "/login";
+    serverMsg: string = null;
 
     ngOnInit(): void {
         this.signupForm = new FormGroup({

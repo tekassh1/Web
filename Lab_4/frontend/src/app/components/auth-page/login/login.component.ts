@@ -32,7 +32,11 @@ import {RouterModule} from '@angular/router';
                     class="wrongInputMsg">
                     Password should contain at least one letter and digit (5-15 symbols, no spaces)
                 </div>
-            
+                <div *ngIf="serverMsg && submitTrigger"
+                     class="wrongInputMsg">
+                    {{serverMsg}}
+                </div>
+                
                 <button type="submit" id="submitBtn">Continue</button>
 
                 <div id="registerOfferBlock">
@@ -48,6 +52,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     submitTrigger: boolean = false;
     signUpPageLink: string = "/signup";
+    serverMsg: string = null;
 
     ngOnInit(): void {
         this.loginForm = new FormGroup({

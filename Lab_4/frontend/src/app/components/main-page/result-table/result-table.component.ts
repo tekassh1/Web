@@ -29,10 +29,7 @@ import {DataService} from "../../../services/data.service";
                         <td style="width: 7%;">{{ req.x }}</td>
                         <td style="width: 7%;">{{ req.y }}</td>
                         <td style="width: 7%;">{{ req.r }}</td>
-
                         <td style="width: 9%;">{{ req.res }}</td>
-
-
                         <td style="width: 30%;">{{ req.reqDate }}</td>
                         <td style="width: 30%;">{{ req.execTime }} ms</td>
                     </tr>
