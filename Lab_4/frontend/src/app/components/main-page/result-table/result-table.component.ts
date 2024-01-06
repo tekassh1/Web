@@ -1,10 +1,14 @@
-import {Component, Input} from "@angular/core";
+import {Component, inject} from "@angular/core";
 import {NgForOf} from "@angular/common";
-import {CoordinatesFormComponent} from "../input-form/input-form.component";
+import {DataService} from "../../../services/data.service";
 
 @Component({
     selector: "result-table",
     standalone: true,
+    imports: [
+        NgForOf
+    ],
+    styleUrls: ['./result-table.component.css'],
     template: `
         <div id="tableBlock">
             <label>Recent results</label>
@@ -20,7 +24,7 @@ import {CoordinatesFormComponent} from "../input-form/input-form.component";
                 </tr>
                 </thead>
                 <tbody id="mainTableBody">
-                <ng-container *ngFor="let req of coordinatesFormComponent.requests">
+                <ng-container *ngFor="let req of dataService.data">
                     <tr>
                         <td style="width: 7%;">{{ req.x }}</td>
                         <td style="width: 7%;">{{ req.y }}</td>
@@ -37,14 +41,9 @@ import {CoordinatesFormComponent} from "../input-form/input-form.component";
                 </tbody>
             </table>
         </div>
-    `,
-    imports: [
-        NgForOf
-    ],
-    styleUrls: ['./result-table.component.css']
+    `
 })
 
 export class ResultTableComponent {
-    @Input()
-    coordinatesFormComponent: CoordinatesFormComponent;
+    protected dataService: DataService = inject(DataService);
 }

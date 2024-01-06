@@ -1,6 +1,7 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, ElementRef, inject, Input, ViewChild} from "@angular/core";
 import {CoordinatesFormComponent} from "../input-form/input-form.component";
 import {NgFor} from "@angular/common";
+import {DataService} from "../../../services/data.service";
 
 @Component({
     selector: "coordinate-plane",
@@ -19,6 +20,8 @@ export class CoordinatePlaneComponent {
 
     @Input()
     coordinatesFormComponent: CoordinatesFormComponent;
+
+    protected dataService: DataService = inject(DataService);
 
     R: string;
     R2: string;

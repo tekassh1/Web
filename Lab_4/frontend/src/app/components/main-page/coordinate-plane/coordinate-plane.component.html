@@ -1,7 +1,7 @@
 <div id="svgDiv">
     <svg #coordinatePlane id="coordinatePlane" viewBox="0 0 500 500">
 
-        <circle *ngFor="let point of coordinatesFormComponent.requests"
+        <circle *ngFor="let point of dataService.data"
                 [attr.cx]="point.x * (220/point.r) + 250"
                 [attr.cy]="-(point.y * (220/point.r) - 250)"
                 r="5" fill="#0077ed"/>

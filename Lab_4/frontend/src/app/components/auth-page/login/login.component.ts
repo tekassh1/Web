@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
+import {RouterModule} from '@angular/router';
 
 @Component({
     selector: "login-form",
@@ -8,42 +9,45 @@ import {NgIf, NgStyle} from "@angular/common";
     imports: [
         ReactiveFormsModule,
         NgIf,
-        NgStyle
+        NgStyle,
+        RouterModule
     ],
     styleUrls: ['./login.component.css'],
     template: `
-        <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
-            <div id="label">Log <a class="colorfulText">in</a><br/></div>
+        <div id="mainPanel">
+            <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+                <div id="label">Log <a class="colorfulText">in</a><br/></div>
             
-            <input placeholder="username" formControlName="username" maxlength="15"
-                   (click)="submitTrigger = false;"/>
-            <input type="password" name="password" placeholder="password" formControlName="password" maxlength="15"
-                   (click)="submitTrigger = false;"/>
+                <input placeholder="username" formControlName="username" maxlength="15"
+                    (click)="submitTrigger = false;"/>
+                <input type="password" name="password" placeholder="password" formControlName="password" maxlength="15"
+                    (click)="submitTrigger = false;"/>
             
-            <div *ngIf="loginForm.controls['username'].invalid && submitTrigger"
-                 class="wrongInputMsg">
-                Username should contain only letters and numbers (5-15 symbols)
-            </div>
-            <div *ngIf="loginForm.controls['password'].invalid && submitTrigger
-                        && loginForm.controls['username'].valid"
-                 class="wrongInputMsg">
-                Password should contain at least one letter and digit (5-15 symbols, no spaces)
-            </div>
+                <div *ngIf="loginForm.controls['username'].invalid && submitTrigger"
+                    class="wrongInputMsg">
+                    Username should contain only letters and numbers (5-15 symbols)
+                </div>
+                <div *ngIf="loginForm.controls['password'].invalid && submitTrigger
+                            && loginForm.controls['username'].valid"
+                    class="wrongInputMsg">
+                    Password should contain at least one letter and digit (5-15 symbols, no spaces)
+                </div>
             
-            <button type="submit" id="submitBtn">Continue</button>
+                <button type="submit" id="submitBtn">Continue</button>
 
-            <div id="registerOfferBlock">
-                Have not account yet?
-                <button type="button">Sign Up</button>
-            </div>
-        </form>
+                <div id="registerOfferBlock">
+                    Have not account yet?
+                    <button type="button" [routerLink]="signUpPageLink">Sign Up</button>
+                </div>
+            </form>
+        </div>
     `
 })
 
-export class LoginFormComponent implements OnInit {
+export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-
     submitTrigger: boolean = false;
+    signUpPageLink: string = "/signup";
 
     ngOnInit(): void {
         this.loginForm = new FormGroup({

@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
+import {RouterModule} from "@angular/router";
 
 @Component({
     selector: "signup-form",
@@ -8,49 +9,52 @@ import {NgIf, NgStyle} from "@angular/common";
     imports: [
         ReactiveFormsModule,
         NgStyle,
-        NgIf
+        NgIf,
+        RouterModule
     ],
     styleUrls: ['./signup.component.css'],
     template: `
-        <form [formGroup]="signupForm" novalidate (ngSubmit)="submit()">
-            <div id="label">Sign <a class="colorfulText">up</a><br/></div>
-
-            <input placeholder="username" formControlName="username" maxlength="15"
-                (click)="submitTrigger = false;"/>
-            <input type="password" placeholder="password" formControlName="password" maxlength="15" 
-                (click)="submitTrigger = false;"/>
-            <input type="password" placeholder="repeat password" formControlName="repeatPassword" maxlength="15" 
-                (click)="submitTrigger = false;"/>
-
-            <button type="submit" id="submitBtn">Register</button>
-
-            <div *ngIf="submitTrigger && signupForm.controls['username'].invalid"
-                 class="wrongInputMsg">
-                Username should contain only letters and numbers (5-15 symbols)
-            </div>
-            <div *ngIf="submitTrigger && signupForm.controls['password'].invalid
-                        && signupForm.controls['username'].valid"
-                 class="wrongInputMsg">
-                Password should contain at least one letter and digit (5-15 symbols, no spaces)
-            </div>
-            <div *ngIf="submitTrigger && signupForm.controls['username'].valid && signupForm.controls['password'].valid
-                        && signupForm.invalid"
-                 class="wrongInputMsg">
-                Passwords are different!
-            </div>
-            
-            <div id="loginOfferBlock">
-                Have an account?
-                <button>Log In</button>
-            </div>
-        </form>
+        <div id="mainPanel">
+            <form [formGroup]="signupForm" novalidate (ngSubmit)="submit()">
+                <div id="label">Sign <a class="colorfulText">up</a><br/></div>
+    
+                <input placeholder="username" formControlName="username" maxlength="15"
+                    (click)="submitTrigger = false;"/>
+                <input type="password" placeholder="password" formControlName="password" maxlength="15" 
+                    (click)="submitTrigger = false;"/>
+                <input type="password" placeholder="repeat password" formControlName="repeatPassword" maxlength="15" 
+                    (click)="submitTrigger = false;"/>
+    
+                <button type="submit" id="submitBtn">Register</button>
+    
+                <div *ngIf="submitTrigger && signupForm.controls['username'].invalid"
+                     class="wrongInputMsg">
+                    Username should contain only letters and numbers (5-15 symbols)
+                </div>
+                <div *ngIf="submitTrigger && signupForm.controls['password'].invalid
+                            && signupForm.controls['username'].valid"
+                     class="wrongInputMsg">
+                    Password should contain at least one letter and digit (5-15 symbols, no spaces)
+                </div>
+                <div *ngIf="submitTrigger && signupForm.controls['username'].valid && signupForm.controls['password'].valid
+                            && signupForm.invalid"
+                     class="wrongInputMsg">
+                    Passwords are different!
+                </div>
+                
+                <div id="loginOfferBlock">
+                    Have an account?
+                    <button type="button" [routerLink]="logInPageLink">Log In</button>
+                </div>
+            </form>
+        </div>
     `
 })
 
-export class SignupFormComponent implements OnInit {
+export class SignupComponent implements OnInit {
     signupForm: FormGroup;
-
     submitTrigger: boolean = false;
+    logInPageLink: string = "/login";
 
     ngOnInit(): void {
         this.signupForm = new FormGroup({

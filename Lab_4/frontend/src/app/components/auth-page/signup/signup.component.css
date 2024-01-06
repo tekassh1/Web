@@ -1,3 +1,15 @@
+#mainPanel {
+    padding-top: 11%;
+    padding-bottom: 11.66%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 0 15px #e3e3e3;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+
 #label {
     font-size: 18px;
 }
@@ -77,7 +89,7 @@ input:focus {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     color: #0077ed;
-    background-color:white;
+    background-color: white;
     border: 0;
 }
 

@@ -1,20 +1,12 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, inject, Input, OnInit, ViewChild} from "@angular/core";
 import {FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {CoordinatePlaneComponent} from "../coordinate-plane/coordinate-plane.component";
+import {DataService} from "../../../services/data.service";
 
 interface validationObj {
     [s: string]: boolean;
 }
-
-type pointResult = {
-    x: string,
-    y: string,
-    r: string,
-    res: boolean,
-    reqDate: string,
-    execTime: string
-};
 
 @Component({
     selector: "main-form",
@@ -27,14 +19,13 @@ type pointResult = {
 export class CoordinatesFormComponent implements OnInit {
     coordsForm: FormGroup;
 
-    // move to service
-    requests: Array<pointResult> = [];
-
     @ViewChild("submitBtn", {static: false})
     submitBtn: ElementRef;
 
     @Input()
     coordinatePlaneComponent: CoordinatePlaneComponent;
+
+    protected dataService: DataService = inject(DataService);
 
     ngOnInit(): void {
         this.coordsForm = new FormGroup({
@@ -47,7 +38,6 @@ export class CoordinatesFormComponent implements OnInit {
     submittedTrigger: boolean = false;
 
     submit() {
-        console.log("submit called!");
         this.submittedTrigger = true;
 
         if (!this.coordsForm.invalid) {
@@ -59,7 +49,7 @@ export class CoordinatesFormComponent implements OnInit {
 
             // magic service call...
 
-            this.requests.unshift({
+            this.dataService.addPoint({
                 x: xCoord,
                 y: yCoord,
                 r: rValue.toString(),
@@ -67,9 +57,7 @@ export class CoordinatesFormComponent implements OnInit {
                 reqDate: "04.01.2024",
                 execTime: "3"
             });
-
         } else {
-            console.log("submit invalid!");
             console.log(this.coordsForm.get('xCoord').value);
             console.log(this.coordsForm.get('yCoord').value);
             console.log(this.coordsForm.get('rValue').value);
