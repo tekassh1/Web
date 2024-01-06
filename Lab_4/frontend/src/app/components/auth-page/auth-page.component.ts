@@ -16,8 +16,8 @@ import {SignupFormComponent} from "./signup/signup.component";
     styleUrls: ['./auth-page.component.css'],
     template: `
         <div id="mainPanel">
-           <login-form class="viewComponent"></login-form>
-<!--            <signup-form class="viewComponent"></signup-form>-->
+<!--           <login-form class="viewComponent"></login-form>-->
+            <signup-form class="viewComponent"></signup-form>
         </div>
     `
 })

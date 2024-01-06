@@ -15,28 +15,26 @@ import {NgIf, NgStyle} from "@angular/common";
         <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
             <div id="label">Log <a class="colorfulText">in</a><br/></div>
             
-            <input name="login" placeholder="username" formControlName="username" maxlength="15"
-                   [ngStyle]="{'background-color': [usernameInputBackground]}"
-                   (click)="resetUsernameBackground()"/>
+            <input placeholder="username" formControlName="username" maxlength="15"
+                   (click)="submitTrigger = false;"/>
             <input type="password" name="password" placeholder="password" formControlName="password" maxlength="15"
-                   [ngStyle]="{'background-color': [passwordInputBackground]}"
-                   (click)="resetPasswordBackground()"/>
+                   (click)="submitTrigger = false;"/>
             
-            <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched"
+            <div *ngIf="loginForm.controls['username'].invalid && submitTrigger"
                  class="wrongInputMsg">
                 Username should contain only letters and numbers (5-15 symbols)
             </div>
-            <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched 
+            <div *ngIf="loginForm.controls['password'].invalid && submitTrigger
                         && loginForm.controls['username'].valid"
                  class="wrongInputMsg">
-                Password should contain letters and at least one digit (5-15 symbols)
+                Password should contain at least one letter and digit (5-15 symbols, no spaces)
             </div>
             
             <button type="submit" id="submitBtn">Continue</button>
 
             <div id="registerOfferBlock">
                 Have not account yet?
-                <button>Sign Up</button>
+                <button type="button">Sign Up</button>
             </div>
         </form>
     `
@@ -45,10 +43,7 @@ import {NgIf, NgStyle} from "@angular/common";
 export class LoginFormComponent implements OnInit {
     loginForm: FormGroup;
 
-    defaultInputBackground: string = "#f3f3f3";
-    errorInputBackground: string = "#ffdfdf";
-    usernameInputBackground: string = this.defaultInputBackground;
-    passwordInputBackground: string = this.defaultInputBackground;
+    submitTrigger: boolean = false;
 
     ngOnInit(): void {
         this.loginForm = new FormGroup({
@@ -60,32 +55,23 @@ export class LoginFormComponent implements OnInit {
     }
 
     submit() {
+        this.submitTrigger = true;
         if (this.loginForm.invalid) return;
 
         console.log("Login success!!!");
     }
 
-    resetUsernameBackground() {
-        this.usernameInputBackground = this.defaultInputBackground;
-    }
-
-    resetPasswordBackground() {
-        this.passwordInputBackground = this.defaultInputBackground;
-    }
-
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {
         let usernameRegex: RegExp = new RegExp('^[0-9A-Za-z_]{5,15}$');
         if (!usernameRegex.test(control.value)) {
-            if (control.touched) this.usernameInputBackground = this.errorInputBackground;
             return {"username": true};
         }
         return null;
     }
 
     passwordValidator(control: FormControl): { [s: string]: boolean } | null {
-        let passwordRegex: RegExp = new RegExp('^(?=.*\d)(?=.*[a-zA-Z])(?=.*[a-zA-Z]).{5,15}$');
+        let passwordRegex: RegExp = new RegExp("^(?!.* )(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+.{5,15}$");
         if (!passwordRegex.test(control.value)) {
-            if (control.touched) this.passwordInputBackground = this.errorInputBackground;
             return {"password": true};
         }
         return null;
