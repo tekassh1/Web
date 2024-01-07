@@ -1,7 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, inject, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: "signup-form",
@@ -12,6 +13,7 @@ import {RouterModule} from "@angular/router";
         NgIf,
         RouterModule
     ],
+    providers: [AuthService],
     styleUrls: ['./signup.component.css'],
     template: `
         <div id="mainPanel">
@@ -61,7 +63,9 @@ export class SignupComponent implements OnInit {
     logInPageLink: string = "/login";
     serverMsg: string = null;
 
-    ngOnInit(): void {
+    private authService: AuthService = inject(AuthService);
+
+    ngOnInit() {
         this.signupForm = new FormGroup({
             "username": new FormControl("",
                 [Validators.required, this.usernameValidator.bind(this)]),
@@ -76,8 +80,16 @@ export class SignupComponent implements OnInit {
     submit() {
         this.submitTrigger = true;
         if (this.signupForm.invalid) return;
+        let username: string = this.signupForm.get('username').value;
+        let password: string = this.signupForm.get('password').value;
 
-        console.log("Registration successful!")
+        let resp: Object;
+
+        this.authService.performSignup(username, password).subscribe(
+            data => {
+                resp = JSON.parse(data);
+            }
+        );
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {

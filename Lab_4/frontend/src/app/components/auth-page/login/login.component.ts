@@ -1,7 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, inject, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 import {RouterModule} from '@angular/router';
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: "login-form",
@@ -12,6 +13,7 @@ import {RouterModule} from '@angular/router';
         NgStyle,
         RouterModule
     ],
+    providers: [AuthService],
     styleUrls: ['./login.component.css'],
     template: `
         <div id="mainPanel">
@@ -54,6 +56,8 @@ export class LoginComponent implements OnInit {
     signUpPageLink: string = "/signup";
     serverMsg: string = null;
 
+    private authService: AuthService = inject(AuthService);
+
     ngOnInit(): void {
         this.loginForm = new FormGroup({
             "username": new FormControl("",
@@ -66,8 +70,16 @@ export class LoginComponent implements OnInit {
     submit() {
         this.submitTrigger = true;
         if (this.loginForm.invalid) return;
+        let username: string = this.loginForm.get('username').value;
+        let password: string = this.loginForm.get('password').value;
 
-        console.log("Login success!!!");
+        let resp: Object;
+
+        this.authService.performLogin(username, password).subscribe(
+            data => {
+                resp = JSON.parse(data);
+            }
+        );
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {

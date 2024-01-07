@@ -3,6 +3,7 @@ import {RouterModule} from "@angular/router";
 
 import {HeaderComponent} from "./components/common/header/header.component";
 import {FooterComponent} from "./components/common/footer/footer.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
     selector: "app-root",
@@ -11,7 +12,8 @@ import {FooterComponent} from "./components/common/footer/footer.component";
     imports: [
         HeaderComponent,
         FooterComponent,
-        RouterModule
+        RouterModule,
+        HttpClientModule,
     ],
     styleUrls: ['./app.component.css']
 })

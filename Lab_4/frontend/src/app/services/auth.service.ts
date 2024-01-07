@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {inject, Injectable} from "@angular/core";
 
 type authData = {
     authType: string,
@@ -7,28 +8,29 @@ type authData = {
     password: string
 }
 
-export class loginService {
+// type serverResponse = {
+//     opCode: string,
+//     message: string,
+//     jwt: string
+// }
+
+@Injectable()
+export class AuthService {
     serverUrl: string = "";
 
-    constructor(private http: HttpClient) {}
+    http: HttpClient = inject(HttpClient);
 
-    performLogin(user: string, pass: string): Observable<Object> {
+    performLogin(user: string, pass: string): Observable<any> {
         let data: authData = {authType: "login", username: user, password: pass};
-        let headers: HttpHeaders = new HttpHeaders().set("Accept", "application/json");
+        let reqHeaders: HttpHeaders = new HttpHeaders().set("Accept", "application/json");
 
-        return this.http.post(this.serverUrl, data);
+        return this.http.post(this.serverUrl, data, {headers: reqHeaders});
     }
-}
 
-export class signupService {
-    serverUrl: string = "";
-
-    constructor(private http: HttpClient) {}
-
-    performSignup(user: string, pass: string): Observable<Object> {
+    performSignup(user: string, pass: string): Observable<any> {
         let data: authData = {authType: "signup", username: user, password: pass};
-        let headers: HttpHeaders = new HttpHeaders().set("Accept", "application/json");
+        let reqHeaders: HttpHeaders = new HttpHeaders().set("Accept", "application/json");
 
-        return this.http.post(this.serverUrl, data);
+        return this.http.post(this.serverUrl, data, {headers: reqHeaders});
     }
 }
