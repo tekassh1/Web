@@ -1,11 +1,10 @@
 package backend.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import backend.model.http.AuthResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
     @PostMapping
@@ -14,7 +13,7 @@ public class AuthenticationController {
     }
 
     @GetMapping
-    public String processGetAuth() {
-        return "get nice!";
+    public ResponseEntity<AuthResponse> processGetAuth() {
+        return ResponseEntity.ok(new AuthResponse("auth successful", "ksjhkjsf"));
     }
 }
