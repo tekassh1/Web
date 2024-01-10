@@ -18,6 +18,8 @@ dependencies {
     implementation("org.springframework:spring-webmvc:6.1.2")
     implementation("org.springframework:spring-beans:6.1.2")
 
+    compileOnly("jakarta.servlet:jakarta.servlet-api:6.0.0")
+
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
 
     implementation("org.postgresql:postgresql:42.6.0")
@@ -25,6 +27,10 @@ dependencies {
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
     implementation("org.springframework.data:spring-data-commons:3.2.1")
     implementation("org.springframework.data:spring-data-jpa:3.2.1")
+
+    implementation("org.springframework.security:spring-security-core:6.2.0")
+    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("com.auth0:java-jwt:4.4.0")
 }
 
 java {

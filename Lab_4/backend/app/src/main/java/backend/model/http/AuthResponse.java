@@ -9,6 +9,8 @@ public class AuthResponse {
         this.jwt = jwt;
     }
 
+    public AuthResponse() {}
+
     public String getMessage() {
         return message;
     }

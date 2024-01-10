@@ -85,11 +85,7 @@ export class SignupComponent implements OnInit {
 
         let resp: Object;
 
-        this.authService.performSignup(username, password).subscribe(
-            data => {
-                resp = JSON.parse(data);
-            }
-        );
+        this.authService.performSignup(username, password);
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {

@@ -75,11 +75,7 @@ export class LoginComponent implements OnInit {
 
         let resp: Object;
 
-        this.authService.performLogin(username, password).subscribe(
-            data => {
-                resp = JSON.parse(data);
-            }
-        );
+        this.authService.performLogin(username, password);
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {
