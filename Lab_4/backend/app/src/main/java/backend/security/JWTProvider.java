@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -19,7 +20,12 @@ import java.time.ZoneId;
 
 @Component
 public class JWTProvider {
+
+    // Move to properties
+    @Value("${jwt.secret.access}")
     private String secretAccess;
+
+    @Value("${jwt.secret.refresh}")
     private String secretRefresh;
 
     UsersRepository usersRepository;
@@ -29,13 +35,11 @@ public class JWTProvider {
 
     public JWTProvider(@Autowired UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
-        secretAccess = RandomStringUtils.random(16);
-        secretRefresh = RandomStringUtils.random(16);
         this.jwtHeader = createJWTHeader();
         this.tokenIssuer = "tekassh1SpringServer";
     }
 
-    private String generateAccessToken(User user) {
+    public String generateAccessToken(User user) {
         Algorithm algorithm = Algorithm.HMAC256(secretAccess);
 
         final LocalDateTime now = LocalDateTime.now();
@@ -51,7 +55,7 @@ public class JWTProvider {
         return token;
     }
 
-    private String generateRefreshToken(User user) {
+    public String generateRefreshToken(User user) {
         Algorithm algorithm = Algorithm.HMAC256(secretRefresh);
 
         final LocalDateTime now = LocalDateTime.now();
@@ -81,20 +85,20 @@ public class JWTProvider {
         }
     }
 
-    public boolean validateAccessToken(User user, String token) {
-        return validateToken(user, token, secretAccess);
+    public boolean validateAccessToken(String username, String token) {
+        return validateToken(username, token, secretAccess);
     }
 
-    public boolean validateRefreshToken(User user, String token) {
-        return validateToken(user, token, secretRefresh);
+    public boolean validateRefreshToken(String username, String token) {
+        return validateToken(username, token, secretRefresh);
     }
 
-    private boolean validateToken(User user, String token, String secret) {
+    private boolean validateToken(String username, String token, String secret) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         try {
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer(tokenIssuer)
-                    .withClaim("username", user.getUsername())
+                    .withClaim("username", username)
                     .build();
 
             verifier.verify(token);

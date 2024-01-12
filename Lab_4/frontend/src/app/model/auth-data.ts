@@ -6,5 +6,12 @@ export type AuthRequest = {
 
 export type AuthResponse = {
     message: string,
-    jwt: string
+    accessToken: string,
+    refreshToken: string
+}
+
+export type RefreshRequest = {
+    username: string,
+    accessToken: string,
+    refreshToken: string
 }

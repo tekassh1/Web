@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
-import {RouterModule} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 
 @Component({
@@ -13,7 +13,6 @@ import {AuthService} from "../../../services/auth.service";
         NgIf,
         RouterModule
     ],
-    providers: [AuthService],
     styleUrls: ['./signup.component.css'],
     template: `
         <div id="mainPanel">
@@ -64,8 +63,12 @@ export class SignupComponent implements OnInit {
     serverMsg: string = null;
 
     private authService: AuthService = inject(AuthService);
+    private router: Router = inject(Router);
 
     ngOnInit() {
+
+        if (isLoggedIn) this.router.navigate(['main']);
+
         this.signupForm = new FormGroup({
             "username": new FormControl("",
                 [Validators.required, this.usernameValidator.bind(this)]),
@@ -83,9 +86,11 @@ export class SignupComponent implements OnInit {
         let username: string = this.signupForm.get('username').value;
         let password: string = this.signupForm.get('password').value;
 
-        let resp: Object;
-
         this.authService.performSignup(username, password);
+
+        let isLoggedIn: boolean = JSON.parse(sessionStorage.getItem("isLoggedIn"));
+        if (isLoggedIn)
+            this.router.navigate(['main']);
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {

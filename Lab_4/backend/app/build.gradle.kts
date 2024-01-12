@@ -28,8 +28,8 @@ dependencies {
     implementation("org.springframework.data:spring-data-commons:3.2.1")
     implementation("org.springframework.data:spring-data-jpa:3.2.1")
 
-    implementation("org.springframework.security:spring-security-core:6.2.0")
     implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("commons-codec:commons-codec:1.15")
     implementation("com.auth0:java-jwt:4.4.0")
 }
 
