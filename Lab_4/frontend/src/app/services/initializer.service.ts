@@ -13,13 +13,11 @@ export class InitializerService {
     authService: AuthService = inject(AuthService);
 
     initialize(): Observable<boolean> {
-        console.log("get refresh called!");
         return this.authService.refreshToken().pipe(
             map((resp: AuthResponse) => {
                 localStorage.setItem("accessToken", resp.accessToken);
                 localStorage.setItem("refreshToken", resp.refreshToken);
                 sessionStorage.setItem("isLoggedIn", "true");
-
                 return true;
             }),
             catchError((error) => {

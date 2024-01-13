@@ -7,7 +7,7 @@ import {RouterModule} from "@angular/router";
     imports: [
         RouterModule
     ],
-    styleUrls: ['./error-page.component.css'],
+    styleUrls: ['./not-found-error-page.component.css'],
     template: `
         <div id="mainPanel">
             <p id="errorCode">{{ errorCode }}</p>
@@ -18,7 +18,7 @@ import {RouterModule} from "@angular/router";
     `
 })
 
-export class ErrorPageComponent {
+export class NotFoundErrorPageComponent {
     homePageLink: string = "";
     errorCode: string = "404";
     labelText: string = "Oops!";

@@ -1,0 +1,46 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#mainPanel {
+    padding-top: 11%;
+    padding-bottom: 5%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 0 15px #e3e3e3;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+#errorCode {
+    color: #dedede;
+    font-size: 80px;
+}
+
+#labelText {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#additionalText {
+    margin-top: 10px;
+}
+
+#goBackBtn {
+    font-size: 15px;
+    margin-top: 100px;
+    color: #fff;
+    background-color: #0077ed;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 16%;
+    height: 38px;
+}
+
+#goBackBtn:hover {
+    background-color: #0061c7;
+}

@@ -3,6 +3,7 @@ import {NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {expand} from "rxjs";
+import {AuthResponse} from "../../../model/auth-data";
 
 @Component({
     selector: "main-header",
@@ -81,9 +82,17 @@ export class HeaderComponent implements OnInit{
     }
 
     logout() {
-        this.authService.logout(localStorage.getItem("username"));
+        console.log("Logout method called!");
+        this.authService.logout(localStorage.getItem("username"))
+            .subscribe({
+                next: (resp: AuthResponse) => {
+                    this.router.navigate(["login"]);
+                },
+                error: (err) => {
+                    this.router.navigate(["serverError"]);
+                }
+            })
         this.expand();
-        this.router.navigate(["login"]);
     }
 
     ngOnInit(): void {
