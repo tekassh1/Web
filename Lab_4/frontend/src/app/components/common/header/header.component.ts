@@ -1,9 +1,7 @@
-import {Component, inject, Input, OnInit, ViewChild} from "@angular/core";
+import {Component, inject, Input, ViewChild} from "@angular/core";
 import {NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
-import {expand} from "rxjs";
-import {AuthResponse} from "../../../model/auth-data";
 
 @Component({
     selector: "main-header",
@@ -12,7 +10,7 @@ import {AuthResponse} from "../../../model/auth-data";
         <header class="header">
             <div class="collapsedHeader">
                 <h2 class="label">LAB 4</h2>
-                <p *ngIf="router.url === '/main'" id="usernameText">{{username}}</p>
+                <p *ngIf="showMainContent" id="usernameText" class="ng-scope ng-binding">{{username}}</p>
                 <img ngSrc="../../../../assets/header/main.svg" class="logo" alt="mainLogo" fill="">
 
                 <button #expandButton (click)="expand()" type="button" id="expandButton">
@@ -28,7 +26,7 @@ import {AuthResponse} from "../../../model/auth-data";
                 <p>Group: <a class="colourfulText">{{ groupNumber }}</a></p>
                 <p style="margin-bottom: 13px;">Variant: <a class="colourfulText">{{ variantNumber }}</a></p>
                 
-                <button *ngIf="router.url === '/main'" #logoutButton (click)="logout()" id="logoutButton" title="Log out">
+                <button *ngIf="showMainContent" #logoutButton (click)="logout()" id="logoutButton" title="Log out">
                     <img #logoutImg ngSrc="{{logoutUrl}}"
                          alt="logoutIcon" fill="" id="logoutImg">
                 </button>
@@ -44,7 +42,7 @@ import {AuthResponse} from "../../../model/auth-data";
     styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
     username: string = localStorage.getItem("username");
 
     @Input() studentName: string;
@@ -68,8 +66,13 @@ export class HeaderComponent implements OnInit{
 
     authService: AuthService = inject(AuthService);
     router: Router = inject(Router);
+    showMainContent: boolean = false;
 
-    showLogOut: boolean = true;
+    constructor() {
+        this.router.events.subscribe(() => {
+                this.showMainContent = this.router.url == '/main';
+        });
+    }
 
     expand() {
         if (this.expandedHeight == this.expandedMaxHeight) {
@@ -82,20 +85,15 @@ export class HeaderComponent implements OnInit{
     }
 
     logout() {
-        console.log("Logout method called!");
         this.authService.logout(localStorage.getItem("username"))
             .subscribe({
-                next: (resp: AuthResponse) => {
+                next: () => {
                     this.router.navigate(["login"]);
                 },
-                error: (err) => {
+                error: () => {
                     this.router.navigate(["serverError"]);
                 }
             })
         this.expand();
-    }
-
-    ngOnInit(): void {
-        this.showLogOut = (sessionStorage.getItem("isLoggedIn")) == "true";
     }
 }

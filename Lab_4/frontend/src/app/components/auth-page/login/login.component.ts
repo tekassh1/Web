@@ -89,9 +89,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['main']);
                 },
                 error: (err) => {
-                    let domparser: DOMParser = new DOMParser();
-                    this.serverMsg = domparser.parseFromString(err.error, 'text/html').body.innerText;
-
+                    this.serverMsg = err.message;
                     sessionStorage.setItem("isLoggedIn", "false");
                     localStorage.removeItem("username");
                 }

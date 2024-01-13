@@ -23,7 +23,6 @@ export const incomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next
             if (error.status == 0 || error.status >= 500)
                 router.navigate(['serverError'])
             else if (error.status == HttpStatusCode.Unauthorized) {
-
                 authService.refreshToken().pipe(
                     map((resp: AuthResponse) => {
                         localStorage.setItem("accessToken", resp.accessToken);
@@ -31,7 +30,7 @@ export const incomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next
                         sessionStorage.setItem("isLoggedIn", "true");
                         return true;
                     }),
-                    catchError((error) => {
+                    catchError(() => {
                         sessionStorage.setItem("isLoggedIn", "false");
                         localStorage.removeItem("username");
                         router.navigate(['login'])
@@ -39,7 +38,9 @@ export const incomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next
                     })
                 );
             }
-            return throwError(() => error.message);
+            let domparser: DOMParser = new DOMParser();
+            let msg = domparser.parseFromString(error.error, 'text/html').body.innerText;
+            return throwError(new Error(msg));
         })
         ,)
     };
