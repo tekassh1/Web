@@ -24,9 +24,7 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthResponse> processAuth(
-            @RequestBody AuthRequest authRequest,
-            @RequestHeader("accessToken") String accessToken) {
+    public ResponseEntity<AuthResponse> processAuth(@RequestBody AuthRequest authRequest) {
 
         if (authRequest.getAuthType().equals("login")) {
             try {
@@ -47,12 +45,12 @@ public class AuthenticationController {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage(), e);
             }
         }
+        else if (authRequest.getAuthType().equals("logout")) {
+            System.out.println("Logout called!");
+            authService.logout(authRequest);
+            return ResponseEntity.ok(new AuthResponse());
+        }
         return ResponseEntity.badRequest()
                     .body(new AuthResponse("bado requesto, Amigo", null, null));
-    }
-
-    @GetMapping
-    public void wtf() {
-
     }
 }

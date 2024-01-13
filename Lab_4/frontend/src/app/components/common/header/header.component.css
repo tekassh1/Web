@@ -42,6 +42,17 @@ p {
     padding-top: 15px;
 }
 
+#usernameText {
+    text-decoration: underline;
+    font-size: 14px;
+    margin-right: 50px;
+    right: 0;
+    margin-top: 20px;
+    color: #fff;
+    z-index: 2;
+    position: absolute;
+}
+
 #expandButton {
     position: relative;
     margin-top: 15px;
@@ -61,17 +72,45 @@ p {
 }
 
 .infoText {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat,sans-serif;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     background-color: #404040;
-    color: white;
+    color: #fff;
 
-    /* for expanding animation */
+    /*Expanding animation*/
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height .5s ease-out;
 }
 
 .colourfulText {
     color: lightgrey;
+}
+
+#logoutButton {
+    color: white;
+    position: relative;
+    margin-bottom: 13px;
+    width: 35px;
+    height: 20px;
+    float: right;
+    border: 0;
+    opacity: 40%;
+    transition: .3s;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+#logoutButton:hover {
+    opacity: 80%;
+}
+
+#logoutImg {
+    position: relative;
+    width: auto;
+    height: 17px;
+    inset: 0;
 }

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {NgIf, NgStyle} from "@angular/common";
 import {Router, RouterModule} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
+import {AuthResponse} from "../../../model/auth-data";
 
 @Component({
     selector: "signup-form",
@@ -66,7 +67,7 @@ export class SignupComponent implements OnInit {
     private router: Router = inject(Router);
 
     ngOnInit() {
-
+        let isLoggedIn: boolean = JSON.parse(sessionStorage.getItem("isLoggedIn"));
         if (isLoggedIn) this.router.navigate(['main']);
 
         this.signupForm = new FormGroup({
@@ -86,11 +87,25 @@ export class SignupComponent implements OnInit {
         let username: string = this.signupForm.get('username').value;
         let password: string = this.signupForm.get('password').value;
 
-        this.authService.performSignup(username, password);
+        this.authService.performSignup(username, password)
+            .subscribe({
+                next: (resp: AuthResponse) => {
+                    localStorage.setItem("accessToken", resp.accessToken);
+                    localStorage.setItem("refreshToken", resp.refreshToken);
 
-        let isLoggedIn: boolean = JSON.parse(sessionStorage.getItem("isLoggedIn"));
-        if (isLoggedIn)
-            this.router.navigate(['main']);
+                    sessionStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("username", username);
+
+                    this.router.navigate(['main']);
+                },
+                error: (err) => {
+                    let domparser: DOMParser = new DOMParser();
+                    this.serverMsg = domparser.parseFromString(err.error, 'text/html').body.innerText;
+
+                    sessionStorage.setItem("isLoggedIn", "false");
+                    localStorage.removeItem("username");
+                }
+            });
     }
 
     usernameValidator(control: FormControl): { [s: string]: boolean } | null {

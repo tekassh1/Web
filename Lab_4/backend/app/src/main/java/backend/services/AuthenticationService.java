@@ -4,9 +4,11 @@ import backend.exceptions.auth.UserNotExistsException;
 import backend.exceptions.auth.UsernameExistsException;
 import backend.exceptions.auth.WrongCredsException;
 import backend.exceptions.auth.WrongCredsFormatException;
+import backend.exceptions.security.TokenValidationException;
 import backend.model.entities.User;
 import backend.model.http.AuthRequest;
 import backend.model.http.AuthResponse;
+import backend.model.http.RefreshRequest;
 import backend.repository.UsersRepository;
 import backend.security.HashProvider;
 import backend.security.JWTProvider;
@@ -23,8 +25,6 @@ public class AuthenticationService {
     private UsersRepository usersRepository;
     private JWTProvider jwtProvider;
     private HashProvider hashProvider;
-
-    private Map<String, String> refreshStorage = new HashMap<>(); // ???
 
     public AuthenticationService(@Autowired UsersRepository usersRepository,
                                  @Autowired JWTProvider jwtProvider,
@@ -45,8 +45,8 @@ public class AuthenticationService {
         if (!hashedPass.equals(storedUser.getPassword()))
             throw new WrongCredsException("Wrong password!");
 
-        String accessToken = jwtProvider.generateAccessToken(storedUser);
-        String refreshToken = jwtProvider.generateRefreshToken(storedUser);
+        String accessToken = jwtProvider.generateAccessToken(storedUser.getUsername());
+        String refreshToken = jwtProvider.generateRefreshToken(storedUser.getUsername());
 
         return new AuthResponse("Login successful", accessToken, refreshToken);
     }
@@ -65,10 +65,27 @@ public class AuthenticationService {
         User newUser = new User(authRequest.getUsername(), hashedPass, salt);
         usersRepository.save(newUser);
 
-        String accessToken = jwtProvider.generateAccessToken(newUser);
-        String refreshToken = jwtProvider.generateRefreshToken(newUser);
+        String accessToken = jwtProvider.generateAccessToken(newUser.getUsername());
+        String refreshToken = jwtProvider.generateRefreshToken(newUser.getUsername());
 
         return new AuthResponse("Signup successful", accessToken, refreshToken);
+    }
+
+    public AuthResponse refreshTokens(RefreshRequest request) throws TokenValidationException {
+        if (jwtProvider.validateAccessToken(request.getUsername(), request.getAccessToken()) &&
+                jwtProvider.validateRefreshToken(request.getUsername(), request.getRefreshToken())) {
+
+            String newAccessToken = jwtProvider.generateAccessToken(request.getUsername());
+            String newRefreshToken = jwtProvider.generateRefreshToken(request.getUsername());
+            return new AuthResponse("Tokens was refreshed successfully!", newAccessToken, newRefreshToken);
+        }
+        else {
+            throw new TokenValidationException("Tokens are invalid!");
+        }
+    }
+
+    public void logout(AuthRequest request) {
+        jwtProvider.removeRefreshToken(request.getUsername());
     }
 
     private void validateUsername(String username) throws WrongCredsFormatException {

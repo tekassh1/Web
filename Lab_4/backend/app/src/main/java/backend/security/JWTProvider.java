@@ -9,7 +9,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JWTProvider {
@@ -29,6 +30,7 @@ public class JWTProvider {
     private String secretRefresh;
 
     UsersRepository usersRepository;
+    private Map<String, String> refreshStorage = new HashMap<>();
 
     private String jwtHeader;
     private String tokenIssuer;
@@ -39,7 +41,7 @@ public class JWTProvider {
         this.tokenIssuer = "tekassh1SpringServer";
     }
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(String username) {
         Algorithm algorithm = Algorithm.HMAC256(secretAccess);
 
         final LocalDateTime now = LocalDateTime.now();
@@ -48,14 +50,16 @@ public class JWTProvider {
         String token = JWT.create()
                 .withHeader(jwtHeader)
                 .withIssuer(tokenIssuer)
-                .withClaim("username", user.getUsername())
+                .withClaim("username", username)
                 .withExpiresAt(accessExpirationInstant)
                 .sign(algorithm);
 
         return token;
     }
 
-    public String generateRefreshToken(User user) {
+    public String generateRefreshToken(String username) {
+        if (refreshStorage.containsKey(username)) refreshStorage.remove(username);
+
         Algorithm algorithm = Algorithm.HMAC256(secretRefresh);
 
         final LocalDateTime now = LocalDateTime.now();
@@ -64,9 +68,11 @@ public class JWTProvider {
         String token = JWT.create()
                 .withHeader(jwtHeader)
                 .withIssuer(tokenIssuer)
-                .withClaim("username", user.getUsername())
+                .withClaim("username", username)
                 .withExpiresAt(refreshExpirationInstant)
                 .sign(algorithm);
+
+        refreshStorage.put(username, token);
 
         return token;
     }
@@ -85,12 +91,18 @@ public class JWTProvider {
         }
     }
 
+    public void removeRefreshToken(String username) {
+        refreshStorage.remove(username);
+    }
+
     public boolean validateAccessToken(String username, String token) {
+        if (username == null || token == null) return false;
         return validateToken(username, token, secretAccess);
     }
 
     public boolean validateRefreshToken(String username, String token) {
-        return validateToken(username, token, secretRefresh);
+        if (username == null || token == null) return false;
+        return refreshStorage.containsKey(username) && refreshStorage.get(username).equals(token);
     }
 
     private boolean validateToken(String username, String token, String secret) {

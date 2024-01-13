@@ -1,5 +1,8 @@
-import {Component, Input, ViewChild} from "@angular/core";
-import {NgOptimizedImage, NgStyle} from "@angular/common";
+import {Component, inject, Input, OnInit, ViewChild} from "@angular/core";
+import {NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
+import {expand} from "rxjs";
 
 @Component({
     selector: "main-header",
@@ -8,6 +11,7 @@ import {NgOptimizedImage, NgStyle} from "@angular/common";
         <header class="header">
             <div class="collapsedHeader">
                 <h2 class="label">LAB 4</h2>
+                <p *ngIf="router.url === '/main'" id="usernameText">{{username}}</p>
                 <img ngSrc="../../../../assets/header/main.svg" class="logo" alt="mainLogo" fill="">
 
                 <button #expandButton (click)="expand()" type="button" id="expandButton">
@@ -22,20 +26,25 @@ import {NgOptimizedImage, NgStyle} from "@angular/common";
                 <p style="margin-top: 13px;">Student: <a class="colourfulText">{{ studentName }}</a></p>
                 <p>Group: <a class="colourfulText">{{ groupNumber }}</a></p>
                 <p style="margin-bottom: 13px;">Variant: <a class="colourfulText">{{ variantNumber }}</a></p>
+                
+                <button *ngIf="router.url === '/main'" #logoutButton (click)="logout()" id="logoutButton" title="Log out">
+                    <img #logoutImg ngSrc="{{logoutUrl}}"
+                         alt="logoutIcon" fill="" id="logoutImg">
+                </button>
             </div>
 
         </header>
     `,
     imports: [
         NgOptimizedImage,
-        NgStyle
+        NgStyle,
+        NgIf
     ],
     styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
-
-    username: string = "";
+export class HeaderComponent implements OnInit{
+    username: string = localStorage.getItem("username");
 
     @Input() studentName: string;
     @Input() groupNumber: string;
@@ -48,12 +57,18 @@ export class HeaderComponent {
     @ViewChild('expandButton', {static: false})
     expandButton: HTMLElement
 
+    logoutUrl: string = "../../../assets/header/logout.svg";
     arrowUpUrl: string = "../../../assets/header/arrow-up.svg";
     arrowDownUrl: string = "./../../assets/header/arrow-down.svg";
     arrowUrl: string = this.arrowDownUrl;
 
     expandedHeight: number = 0;
     expandedMaxHeight: number = 130;
+
+    authService: AuthService = inject(AuthService);
+    router: Router = inject(Router);
+
+    showLogOut: boolean = true;
 
     expand() {
         if (this.expandedHeight == this.expandedMaxHeight) {
@@ -63,5 +78,15 @@ export class HeaderComponent {
             this.expandedHeight = this.expandedMaxHeight;
             this.arrowUrl = this.arrowUpUrl;
         }
+    }
+
+    logout() {
+        this.authService.logout(localStorage.getItem("username"));
+        this.expand();
+        this.router.navigate(["login"]);
+    }
+
+    ngOnInit(): void {
+        this.showLogOut = (sessionStorage.getItem("isLoggedIn")) == "true";
     }
 }
