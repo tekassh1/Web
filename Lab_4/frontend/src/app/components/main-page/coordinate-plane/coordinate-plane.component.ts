@@ -29,6 +29,8 @@ export class CoordinatePlaneComponent {
     mR: string;
     mR2: string;
 
+    scale: number;
+
     setDefaultR() {
         this.R = "R";
         this.R2 = "R/2";
@@ -41,6 +43,11 @@ export class CoordinatePlaneComponent {
         this.R2 = (r / 2).toFixed(1).toString();
         this.mR = (-r).toFixed(1).toString();
         this.mR2 = (-r / 2).toFixed(1).toString();
+    }
+
+    // 5 - max img scale size (5/5 = 1)
+    setPlaneScaleCoefficient(scale: number) {
+        this.scale = scale/5;
     }
 
     sendRequest(event) {

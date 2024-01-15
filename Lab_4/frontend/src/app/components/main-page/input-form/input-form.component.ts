@@ -115,21 +115,28 @@ export class CoordinatesFormComponent implements OnInit {
 
     rValueValidator(control: FormControl): { [s: string]: boolean } | null {
         let validationMap: validationObj = {};
+        let defaultR: number = 5;
 
         if (control.value === "" || Number.isNaN(parseInt(control.value))) {
             validationMap['empty'] = true;
             this.coordinatePlaneComponent.setDefaultR();
+            this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
         } else if (control.value < 0 || control.value == 0) {
             validationMap['negative'] = true;
             this.coordinatePlaneComponent.setDefaultR();
+            this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
         } else if (isNaN(control.value)) {
             validationMap['NaN'] = true;
             this.coordinatePlaneComponent.setDefaultR();
+            this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
         } else if ((control.value < this.rMin) || (control.value > this.rMax)) {
             validationMap['rangeErr'] = true;
             this.coordinatePlaneComponent.setDefaultR();
+            this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
         } else {
-            this.coordinatePlaneComponent.setR(parseFloat(this.coordsForm.get('rValue').value));
+            let rVal = this.coordsForm.get('rValue').value;
+            this.coordinatePlaneComponent.setR(parseFloat(rVal));
+            this.coordinatePlaneComponent.setPlaneScaleCoefficient(rVal);
         }
 
         return validationMap;
