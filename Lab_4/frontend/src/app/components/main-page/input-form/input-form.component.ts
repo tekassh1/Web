@@ -3,6 +3,9 @@ import {FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators} fr
 import {NgIf} from "@angular/common";
 import {CoordinatePlaneComponent} from "../coordinate-plane/coordinate-plane.component";
 import {DataService} from "../../../services/data.service";
+import {CheckPointService} from "../../../services/check-point.service";
+import {PointRequest, PointResponse} from "../../../model/point-data";
+import {AuthResponse} from "../../../model/auth-data";
 
 interface validationObj {
     [s: string]: boolean;
@@ -13,6 +16,7 @@ interface validationObj {
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, NgIf],
     styleUrls: ["input-form.css"],
+    providers: [CheckPointService],
     templateUrl: './input-form.component.html'
 })
 
@@ -26,6 +30,7 @@ export class CoordinatesFormComponent implements OnInit {
     coordinatePlaneComponent: CoordinatePlaneComponent;
 
     protected dataService: DataService = inject(DataService);
+    protected checkPointService: CheckPointService = inject(CheckPointService);
 
     ngOnInit(): void {
         this.coordsForm = new FormGroup({
@@ -41,22 +46,22 @@ export class CoordinatesFormComponent implements OnInit {
         this.submittedTrigger = true;
 
         if (!this.coordsForm.invalid) {
-            console.log("submit valid!");
 
             let xCoord: string = this.coordsForm.get('xCoord').value;
             let yCoord: string = this.coordsForm.get('yCoord').value;
             let rValue: string = this.coordsForm.get('rValue').value;
 
-            // magic service call...
-
-            this.dataService.addPoint({
-                x: xCoord,
-                y: yCoord,
-                r: rValue.toString(),
-                res: true,
-                reqDate: "04.01.2024",
-                execTime: "3"
-            });
+            let pointReq: PointRequest = {x: xCoord, y: yCoord, r: rValue};
+            this.checkPointService.checkPoint(pointReq).subscribe(
+                {
+                    next: (resp: PointResponse) => {
+                        this.dataService.addPoint(resp);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                }
+            );
         } else {
             console.log(this.coordsForm.get('xCoord').value);
             console.log(this.coordsForm.get('yCoord').value);

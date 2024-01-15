@@ -28,10 +28,10 @@ import {DataService} from "../../../services/data.service";
                     <tr>
                         <td style="width: 7%;">{{ req.x }}</td>
                         <td style="width: 7%;">{{ req.y }}</td>
-                        <td style="width: 7%;">{{ req.r }}</td>
-                        <td style="width: 9%;">{{ req.res }}</td>
-                        <td style="width: 30%;">{{ req.reqDate }}</td>
-                        <td style="width: 30%;">{{ req.execTime }} ms</td>
+                        <td style="width: 5%;">{{ req.r }}</td>
+                        <td style="width: 9%;">{{ req.result }}</td>
+                        <td style="width: 32%;">{{ req.requestTime }}</td>
+                        <td style="width: 30%;">{{ req.executionTime }} ms</td>
                     </tr>
                 </ng-container>
 

@@ -1,11 +1,16 @@
+import {Timestamp} from "rxjs";
+
 export type PointRequest = {
-    authType: string,
-    username: string,
-    password: string
+    x: string;
+    y: string;
+    r: string;
 }
 
 export type PointResponse = {
-    authType: string,
-    username: string,
-    password: string
+    x: string;
+    y: string;
+    r: string;
+    result: boolean;
+    requestTime: Date;
+    executionTime: string;
 }

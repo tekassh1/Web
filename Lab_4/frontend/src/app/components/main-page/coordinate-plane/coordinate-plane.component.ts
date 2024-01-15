@@ -1,6 +1,6 @@
 import {Component, ElementRef, inject, Input, ViewChild} from "@angular/core";
 import {CoordinatesFormComponent} from "../input-form/input-form.component";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {DataService} from "../../../services/data.service";
 
 @Component({
@@ -8,7 +8,8 @@ import {DataService} from "../../../services/data.service";
     standalone: true,
     templateUrl: './coordinate-plane.component.html',
     imports: [
-        NgFor
+        NgFor,
+        NgIf
     ],
     styleUrls: ['./coordinate-plane.component.css']
 })

@@ -1,8 +1,6 @@
 package backend.config;
 
 import backend.security.JWTInterceptor;
-import backend.security.JWTProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -32,6 +30,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/main");
+        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/checkPoint", "/getPoints");
     }
 }

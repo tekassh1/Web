@@ -30,7 +30,7 @@ export const incomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next
                         sessionStorage.setItem("isLoggedIn", "true");
                         return true;
                     }),
-                    catchError(() => {
+                    catchError((err) => {
                         sessionStorage.setItem("isLoggedIn", "false");
                         localStorage.removeItem("username");
                         router.navigate(['login'])

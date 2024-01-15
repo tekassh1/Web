@@ -26,23 +26,3 @@ export const outcomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, nex
         return next(req);
     }
 };
-
-// @Injectable()
-// export class OutcomeInterceptor implements HttpInterceptor {
-//     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-//         let accessToken = localStorage.getItem("accessToken");
-//         let username = localStorage.getItem("username");
-//
-//         if (accessToken) {
-//             const cloned = req.clone({
-//                 setHeaders: {
-//                     username: `${username}`,
-//                     accessToken: `${accessToken}`
-//                 },
-//             });
-//             return next.handle(cloned);
-//         } else {
-//             return next.handle(req);
-//         }
-//     }
-// }

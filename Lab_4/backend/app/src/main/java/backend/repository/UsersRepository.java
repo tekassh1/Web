@@ -1,7 +1,6 @@
 package backend.repository;
 
 import backend.model.entities.User;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +15,4 @@ public interface UsersRepository extends CrudRepository<User, Long> {
     boolean existsByUsername(String username);
 
     User findByUsername(String username);
-
-
 }
