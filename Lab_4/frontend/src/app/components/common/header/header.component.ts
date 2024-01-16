@@ -11,8 +11,13 @@ import {Router} from "@angular/router";
             <div class="collapsedHeader">
                 <h2 class="label">LAB 4</h2>
                 <p *ngIf="showMainContent" id="usernameText" class="ng-scope ng-binding">{{username}}</p>
+                
+<!--                 local -->
                 <img ngSrc="../../../../assets/header/main.svg" class="logo" alt="mainLogo" fill="">
 
+                <!-- helios -->
+<!--                <img ngSrc="assets/header/main.svg" class="logo" alt="mainLogo" fill="">-->
+                
                 <button #expandButton (click)="expand()" type="button" id="expandButton">
                     <img #arrow ngSrc="{{arrowUrl}}"
                          alt="expandAuthorIcon" fill="" id="arrow">
@@ -56,9 +61,16 @@ export class HeaderComponent {
     @ViewChild('expandButton', {static: false})
     expandButton: HTMLElement
 
-    logoutUrl: string = "../../../assets/header/logout.svg";
-    arrowUpUrl: string = "../../../assets/header/arrow-up.svg";
-    arrowDownUrl: string = "./../../assets/header/arrow-down.svg";
+    // Local urls
+    // logoutUrl: string = "../../../assets/header/logout.svg";
+    // arrowUpUrl: string = "../../../assets/header/arrow-up.svg";
+    // arrowDownUrl: string = "./../../assets/header/arrow-down.svg";
+
+    // Helios urls
+    logoutUrl: string = "assets/header/logout.svg";
+    arrowUpUrl: string = "assets/header/arrow-up.svg";
+    arrowDownUrl: string = "assets/header/arrow-down.svg";
+
     arrowUrl: string = this.arrowDownUrl;
 
     expandedHeight: number = 0;

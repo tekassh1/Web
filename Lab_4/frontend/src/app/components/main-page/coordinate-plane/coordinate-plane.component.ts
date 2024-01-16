@@ -71,7 +71,7 @@ export class CoordinatePlaneComponent {
             return;
         }
 
-        let scaleCoefficient: number = 220 / rVal;  // 220 because of 30px padding from the frame
+        let scaleCoefficient: number = 220 / 5;  // 220 because of 30px padding from the frame (5 - default r size)
 
         let areaClickedX: number = cursorPoint.x;   // Coords in svg area
         let areaClickedY: number = cursorPoint.y;

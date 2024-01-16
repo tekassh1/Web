@@ -1,5 +1,3 @@
-import {Timestamp} from "rxjs";
-
 export type PointRequest = {
     x: string;
     y: string;

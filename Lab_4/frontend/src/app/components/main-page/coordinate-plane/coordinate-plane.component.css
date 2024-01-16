@@ -11,6 +11,12 @@
     background-color: white;
 }
 
+@media (min-width: 642px) and (max-width: 1216px) {
+    #svgDiv {
+        height: max-content;
+    }
+}
+
 #clickArea {
     cursor: pointer;
     opacity: 0;

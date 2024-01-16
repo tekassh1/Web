@@ -12,14 +12,6 @@
     background-color: white;
 }
 
-#tableBlock label {
-    width: 100%;
-    float: left;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    color: #72be00
-}
-
 #tableBlock table {
     overflow-y: auto;
     overflow-x: hidden;
@@ -30,6 +22,25 @@
     width: 100%;
     min-height: 120px;
     max-height: 120px;
+}
+
+#tableBlock label {
+    width: 100%;
+    float: left;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: #72be00
+}
+
+@media (min-width: 642px) and (max-width: 1216px) {
+    #tableBlock {
+        margin-top: 0;
+        margin-left: 40px;
+    }
+
+    #tableBlock table {
+        max-height: 600px;
+    }
 }
 
 #headerTr {

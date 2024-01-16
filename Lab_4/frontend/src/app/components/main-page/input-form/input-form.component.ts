@@ -57,6 +57,7 @@ export class CoordinatesFormComponent implements OnInit {
                         this.dataService.addPoint(resp);
                     },
                     error: (err) => {
+                        console.log("Error occurred in form submit method!");
                         console.log(err);
                     }
                 }

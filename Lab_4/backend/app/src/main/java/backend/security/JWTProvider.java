@@ -46,7 +46,7 @@ public class JWTProvider {
         Algorithm algorithm = Algorithm.HMAC256(secretAccess);
 
         final LocalDateTime now = LocalDateTime.now();
-        final Instant accessExpirationInstant = now.plusSeconds(300).atZone(ZoneId.systemDefault()).toInstant();
+        final Instant accessExpirationInstant = now.plusSeconds(30).atZone(ZoneId.systemDefault()).toInstant();
 
         String token = JWT.create()
                 .withHeader(jwtHeader)

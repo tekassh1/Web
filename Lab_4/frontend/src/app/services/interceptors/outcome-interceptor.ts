@@ -12,6 +12,7 @@ import {Route, Router} from "@angular/router";
 export const outcomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn):
     Observable<HttpEvent<any>> => {
     let accessToken = localStorage.getItem("accessToken");
+    console.log(accessToken);
     let username = localStorage.getItem("username");
 
     if (accessToken) {

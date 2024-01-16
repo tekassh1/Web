@@ -2,8 +2,8 @@
     <svg #coordinatePlane id="coordinatePlane" viewBox="0 0 500 500">
 
         <circle *ngFor="let point of dataService.data"
-                [attr.cx]="point.x * (220/point.r) + 250"
-                [attr.cy]="-(point.y * (220/point.r) - 250)"
+                [attr.cx]="((point.x * (220/point.r)) * scale + 250)"
+                [attr.cy]="(-((point.y * (220/point.r)) * scale - 250))"
                 r="5" [attr.fill]="point.result == true ? '#0077ed' : 'red'"/>
 
         <!-- x axis -->

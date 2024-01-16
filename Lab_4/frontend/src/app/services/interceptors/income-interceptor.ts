@@ -43,4 +43,4 @@ export const incomeInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next
             return throwError(new Error(msg));
         })
         ,)
-    };
+};

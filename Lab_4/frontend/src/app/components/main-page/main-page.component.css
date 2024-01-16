@@ -5,6 +5,7 @@
 }
 
 #controlPanel {
+    width: auto;
     flex: 5;
     position: relative;
     text-align: center;
@@ -23,6 +24,12 @@
     border-radius: 15px;
     margin: 20px;
     flex-direction: column;
+}
+
+@media (min-width: 642px) and (max-width: 1216px) {
+    #secondaryPanel {
+        flex-direction: row;
+    }
 }
 
 coordinate-plane {
