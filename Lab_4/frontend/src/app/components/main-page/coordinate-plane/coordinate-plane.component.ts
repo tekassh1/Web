@@ -1,6 +1,6 @@
 import {Component, ElementRef, inject, Input, ViewChild} from "@angular/core";
 import {CoordinatesFormComponent} from "../input-form/input-form.component";
-import {NgFor, NgIf} from "@angular/common";
+import {NgFor, NgIf, NgStyle} from "@angular/common";
 import {DataService} from "../../../services/data.service";
 
 @Component({
@@ -9,9 +9,10 @@ import {DataService} from "../../../services/data.service";
     templateUrl: './coordinate-plane.component.html',
     imports: [
         NgFor,
-        NgIf
+        NgIf,
+        NgStyle
     ],
-    styleUrls: ['./coordinate-plane.component.css']
+    styleUrls: ['./coordinate-plane.component.css'],
 })
 
 export class CoordinatePlaneComponent {
@@ -23,6 +24,8 @@ export class CoordinatePlaneComponent {
     coordinatesFormComponent: CoordinatesFormComponent;
 
     protected dataService: DataService = inject(DataService);
+
+    isSmallFont: boolean = false;
 
     R: string;
     R2: string;

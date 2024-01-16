@@ -15,3 +15,11 @@
     cursor: pointer;
     opacity: 0;
 }
+
+.defaultFontSize {
+    font-size: 16px;
+}
+
+.smallFontSize {
+    font-size: 10px;
+}

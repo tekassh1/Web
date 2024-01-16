@@ -5,7 +5,6 @@ import {CoordinatePlaneComponent} from "../coordinate-plane/coordinate-plane.com
 import {DataService} from "../../../services/data.service";
 import {CheckPointService} from "../../../services/check-point.service";
 import {PointRequest, PointResponse} from "../../../model/point-data";
-import {AuthResponse} from "../../../model/auth-data";
 
 interface validationObj {
     [s: string]: boolean;
@@ -121,22 +120,27 @@ export class CoordinatesFormComponent implements OnInit {
             validationMap['empty'] = true;
             this.coordinatePlaneComponent.setDefaultR();
             this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
+            this.coordinatePlaneComponent.isSmallFont = false;
         } else if (control.value < 0 || control.value == 0) {
             validationMap['negative'] = true;
             this.coordinatePlaneComponent.setDefaultR();
             this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
+            this.coordinatePlaneComponent.isSmallFont = false;
         } else if (isNaN(control.value)) {
             validationMap['NaN'] = true;
             this.coordinatePlaneComponent.setDefaultR();
             this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
+            this.coordinatePlaneComponent.isSmallFont = false;
         } else if ((control.value < this.rMin) || (control.value > this.rMax)) {
             validationMap['rangeErr'] = true;
             this.coordinatePlaneComponent.setDefaultR();
             this.coordinatePlaneComponent.setPlaneScaleCoefficient(defaultR);
+            this.coordinatePlaneComponent.isSmallFont = false;
         } else {
             let rVal = this.coordsForm.get('rValue').value;
             this.coordinatePlaneComponent.setR(parseFloat(rVal));
             this.coordinatePlaneComponent.setPlaneScaleCoefficient(rVal);
+            this.coordinatePlaneComponent.isSmallFont = rVal <= 1.5;
         }
 
         return validationMap;
