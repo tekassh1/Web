@@ -71,6 +71,10 @@ export class CoordinatesFormComponent implements OnInit {
         }
     }
 
+    getR() {
+        return this.coordsForm.get('rValue').value;
+    }
+
     reset() {
         this.submittedTrigger = false;
         this.coordsForm.controls['xCoord'].setValue("");

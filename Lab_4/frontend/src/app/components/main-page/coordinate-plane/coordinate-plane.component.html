@@ -2,9 +2,11 @@
     <svg #coordinatePlane id="coordinatePlane" viewBox="0 0 500 500">
 
         <circle *ngFor="let point of dataService.data"
-                [attr.cx]="((point.x * (220/point.r)) * scale + 250)"
-                [attr.cy]="(-((point.y * (220/point.r)) * scale - 250))"
-                r="5" [attr.fill]="point.result == true ? '#0077ed' : 'red'"/>
+                [attr.cx]="((point.x * (220/5))  + 250)"
+                [attr.cy]="(-((point.y * (220/5)) - 250))"
+                r="5" [attr.fill]="this.coordinatesFormComponent.getR() == point.r ?
+                                    (point.result == true ? '#0077ed' : 'red') : ('#b7b7b7')"/>
+<!--                r="5" [attr.fill]="point.result == true ? '#0077ed' : 'red'"/>-->
 
         <!-- x axis -->
         <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="1" stroke-linecap="square"/>
