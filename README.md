@@ -5,7 +5,7 @@
 * Lab_1 - PHP, JS
 * Lab_2 - JSP
 * Lab_3 - JSF
-* **Lab_4** - Spring Framework, Angular (самый крупный проект репозитория)
+* **Lab_4 - Spring Framework, Angular** (самый крупный проект репозитория)
 
  ## Описание Lab_4
  ### Backend
