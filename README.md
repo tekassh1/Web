@@ -24,3 +24,13 @@
  * **Сервисы**
  * **Dependency Injection**
  * **Reactive Forms**
+   
+Область отрисовки точек также кликабельна - не обязательно вводить данные вручную. Координаты высчитываются посредством TypeScript относительно скейла и расширения экрана.
+## Примеры работы приложения
+![image](https://github.com/user-attachments/assets/d6b5fe4c-da6c-4178-b547-33fafd8a9dc4)
+![image](https://github.com/user-attachments/assets/7f1ca729-4775-4cdd-9df9-d8d238564798)
+![image](https://github.com/user-attachments/assets/fc165ccc-b548-45b3-9743-6ce46de5e0b8)
+![image](https://github.com/user-attachments/assets/f25482bf-c652-4a4c-b513-150ac294f882)
+
+
+
